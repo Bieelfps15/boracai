@@ -312,8 +312,8 @@ include '../conexao.php';
                     <h3 style="text-align: center;color: white;">Tortas</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal4" style="float: right;">Adicionar torta</button>
 
-                    <!-- Campo de busca para Bolos -->
-                    <input type="text" id="filterBolos" class="form-control filter-input" placeholder="Buscar nos Bolos">
+                    <!-- Campo de busca para torta -->
+                    <input type="text" id="filterBolos" class="form-control filter-input" placeholder="Buscar nas Torta">
 
                     <div class="col-lg-12">
                         <table id="tabelaTorta" class="table table-striped table-bordered">
@@ -338,7 +338,7 @@ include '../conexao.php';
                                             <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
                                         </td>
                                     </tr>
-                                    <!-- Modal para edição do bolo -->
+                                    <!-- Modal para edição da torta -->
                                     <div class="modal fade" id="modaltorta<?= $id_produto ?>" tabindex="-1" aria-labelledby="modaltortaLabel<?= $id_produto ?>" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -385,16 +385,16 @@ include '../conexao.php';
                     </div>
                 </div>
 
-                <!-- Aba de alfajar -->
+                <!-- Aba de alfajor -->
                 <div id="menu5" class="tab-pane fade" role="tabpanel" aria-labelledby="menu5-tab">
-                    <h3 style="text-align: center;color: white;">Alfajar</h3>
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal5" style="float: right;">Adicionar Alfajar</button>
+                    <h3 style="text-align: center;color: white;">Alfajor</h3>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal5" style="float: right;">Adicionar Alfajor</button>
 
-                    <!-- Campo de busca para alfajar -->
-                    <input type="text" id="filterAlfajar" class="form-control filter-input" placeholder="Buscar nos Bolos">
+                    <!-- Campo de busca para alfajor -->
+                    <input type="text" id="filterAlfajor" class="form-control filter-input" placeholder="Buscar nos Alfajor">
 
                     <div class="col-lg-12">
-                        <table id="tabelaAlfajar" class="table table-striped table-bordered">
+                        <table id="tabelaAlfajor" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th> Sabor </th>
@@ -416,7 +416,7 @@ include '../conexao.php';
                                             <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
                                         </td>
                                     </tr>
-                                    <!-- Modal para edição do alfajar -->
+                                    <!-- Modal para edição do alfajor -->
                                     <div class="modal fade" id="modalalfajar<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalalfajarLabel<?= $id_produto ?>" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -469,7 +469,7 @@ include '../conexao.php';
                 <div id="menu6" class="tab-pane fade" role="tabpanel" aria-labelledby="menu6-tab">
                     <h3 style="text-align: center;color: white;">Brigadeiro</h3>
                     <!-- Campo de busca para brigadeiro -->
-                    <input type="text" id="filterBrigadeiro" class="form-control filter-input" placeholder="Buscar no Açaí">
+                    <input type="text" id="filterBrigadeiro" class="form-control filter-input" placeholder="Buscar no brigadeiro">
                     <div class="col-lg-12">
                         <table id="tabelaBrigadeiro" class="table table-striped table-bordered">
                             <thead>
@@ -681,20 +681,16 @@ include '../conexao.php';
                 l = "",
                 o = window.Event ? t.which : t.keyCode;
 
-            // Permitir apenas números e teclas especiais (Enter, Backspace)
-            if (o === 13 || o === 8) return true; // Enter ou Backspace
+            if (o === 13 || o === 8) return true; 
 
             n = String.fromCharCode(o);
 
-            // Permitir apenas números
-            if (n < '0' || n > '9') return false; // Impede letras e caracteres especiais
+            if (n < '0' || n > '9') return false; 
 
             u = a.value.length;
 
-            // Elimina zeros à esquerda
             for (h = 0; h < u && (a.value.charAt(h) === '0' || a.value.charAt(h) === r); h++);
 
-            // Constrói a string de números
             l = "";
             for (; h < u; h++) {
                 if ("0123456789".indexOf(a.value.charAt(h)) !== -1) {
@@ -702,9 +698,8 @@ include '../conexao.php';
                 }
             }
 
-            l += n; // Adiciona o novo caractere
+            l += n; 
 
-            // Formata a entrada
             if (l.length === 0) {
                 a.value = "";
             } else if (l.length === 1) {
@@ -715,7 +710,7 @@ include '../conexao.php';
                 let ajd2 = "";
                 for (h = l.length - 3, j = 0; h >= 0; h--) {
                     if (j === 3) {
-                        ajd2 += e; // Adiciona o separador de milhar
+                        ajd2 += e;
                         j = 0;
                     }
                     ajd2 += l.charAt(h);
@@ -727,9 +722,9 @@ include '../conexao.php';
                 for (h = tamanho2 - 1; h >= 0; h--) {
                     a.value += ajd2.charAt(h);
                 }
-                a.value += r + l.substr(l.length - 2, 2); // Adiciona a parte decimal
+                a.value += r + l.substr(l.length - 2, 2); 
             }
-            return false; // Previne a entrada padrão
+            return false; 
         }
     </script>
 
@@ -775,6 +770,14 @@ include '../conexao.php';
 
         document.getElementById('filterTorta').addEventListener('keyup', function() {
             filterTable('filterTorta', 'tabelaTorta');
+        });
+
+        document.getElementById('filterAlfajor').addEventListener('keyup', function() {
+            filterTable('filterAlfajor', 'tabelaAlfajor');
+        });
+
+        document.getElementById('filterBrigadeiro').addEventListener('keyup', function() {
+            filterTable('filterBrigadeiro', 'tabelaBrigadeiro');
         });
 
         document.getElementById('filterSabores').addEventListener('keyup', function() {
