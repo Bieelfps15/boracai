@@ -1,11 +1,11 @@
 <?php
+
 $total_pedido = 0;
 
 if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
     echo "<div class='alert alert-info'>Nenhum item no pedido.</div>";
 } else {
     echo "<h4 class='text-center my-4'>Pedido</h4>";
-
     echo "<div class='table-responsive'>";
     echo "<table class='table table-bordered table-hover table-sm'>";
     echo "<thead class='thead-light'><tr><th>Produto</th><th>Tamanho/Sabor</th><th>Adicionais</th><th>Preço</th><th>Ações</th></tr></thead>";
@@ -25,17 +25,22 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
         } elseif ($item['tipo'] == 'bolo') {
             echo "<td>{$item['tipo']}</td>";
             echo "<td>{$item['sabor']}</td>";
-            echo "<td>N/A</td>"; // Não há adicionais para bolo
+            echo "<td>N/A</td>";
             echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
         } elseif ($item['tipo'] == 'torta') {
             echo "<td>{$item['tipo']}</td>";
             echo "<td>{$item['sabor']}</td>";
-            echo "<td>N/A</td>"; // Não há adicionais para torta
+            echo "<td>N/A</td>";
             echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
         } elseif ($item['tipo'] == 'alfajor') {
             echo "<td>{$item['tipo']}</td>";
             echo "<td>{$item['sabor']}</td>";
-            echo "<td>N/A</td>"; // Não há adicionais para alfajor
+            echo "<td>N/A</td>";
+            echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
+        } elseif ($item['tipo'] == 'brigadeiro') {
+            echo "<td>{$item['nome']}</td>";
+            echo "<td>{$item['tamanho']}</td>";
+            echo "<td>{$item['sabores']}</td>";
             echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
         }
 
@@ -65,7 +70,7 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
     echo "<option value='ifood'>Ifood</option>";
     echo "</select>";
 
-    echo "<input type='hidden' name='valor_total' id='valor_total' value='" . number_format($total_pedido, 2, '.', '') . "'>"; 
+    echo "<input type='hidden' name='valor_total' id='valor_total' value='" . number_format($total_pedido, 2, '.', '') . "'>";
 
     echo "<button type='button' class='btn btn-info mt-2 mb-2' id='toggleTaxa'>Adicionar Taxa de Entrega?</button>";
 
@@ -100,7 +105,10 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
 
         // Atualiza o campo oculto de valor total
         document.getElementById('valor_total').value = totalComTaxa.toFixed(2).replace('.', ','); // Formata e atualiza o valor
-        document.getElementById('exibir_valor_total').innerText = "R$ " + totalComTaxa.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); // Atualiza exibição
+        document.getElementById('exibir_valor_total').innerText = "R$ " + totalComTaxa.toLocaleString('pt-BR', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }); // Atualiza exibição
     }
 </script>
 
@@ -112,11 +120,11 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
             l = "",
             o = window.Event ? t.which : t.keyCode;
 
-        if (o === 13 || o === 8) return true; 
+        if (o === 13 || o === 8) return true;
 
         n = String.fromCharCode(o);
 
-        if (n < '0' || n > '9') return false; 
+        if (n < '0' || n > '9') return false;
 
         u = a.value.length;
 
@@ -129,7 +137,7 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
             }
         }
 
-        l += n; 
+        l += n;
 
         if (l.length === 0) {
             a.value = "";
@@ -153,11 +161,11 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
             for (h = tamanho2 - 1; h >= 0; h--) {
                 a.value += ajd2.charAt(h);
             }
-            a.value += r + l.substr(l.length - 2, 2); 
+            a.value += r + l.substr(l.length - 2, 2);
         }
 
         atualizarTotal();
 
-        return false; 
+        return false;
     }
 </script>

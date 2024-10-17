@@ -1,6 +1,6 @@
 <?php
 include '../../conexao.php';
-session_start(); // Certifique-se de que a sessão é iniciada corretamente
+session_start(); 
 
 // Verifica se o usuário está logado
 if (!isset($_SESSION['boracai'])) {
@@ -38,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
             'adicionais' => $adicionais,
             'valor' => $valor_total_acai
         ];
-
     } elseif ($_POST['acao'] == 'adicionar_bolo') {
         $sabor_bolo = $_POST['sabor_bolo'];
         $valor_bolo = floatval(explode(" - R$", $sabor_bolo)[1]);
@@ -72,9 +71,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
             'sabor' => $sabor_alfajor,
             'valor' => $valor_alfajor
         ];
+    } elseif ($_POST['acao'] == 'adicionar_brigadeiro') {
+        $tamanhobrigadeiro = $_POST['tamanho_brigadeiro'] ?? '';
+        $saboresSelecionados = [];
+
+        for ($i = 1; $i <= 4; $i++) {
+            if (isset($_POST["sabor_$i"])) {
+                $saboresSelecionados[] = $_POST["sabor_$i"];
+            }
+        }
+
+        if (strpos($tamanhobrigadeiro, " - R$ ") !== false) {
+            $valor_brigadeiro = floatval(explode(" - R$ ", $tamanhobrigadeiro)[1]);
+            $tamanho_brigadeiro = explode(" - R$ ", $tamanhobrigadeiro)[0];
+
+            $saboresString = implode(", ", $saboresSelecionados);
+
+            $_SESSION['carrinho'][] = [
+                'nome' => 'Brigadeiro 4 Uni.',
+                'tipo' => 'brigadeiro',
+                'tamanho' => $tamanho_brigadeiro,
+                'sabores' => $saboresString,
+                'valor' => $valor_brigadeiro
+            ];
+        } else {
+            echo "Erro: Formato de tamanho não reconhecido.";
+        }
     }
 }
-
 header("Location: venda.php");
 exit();
-?>

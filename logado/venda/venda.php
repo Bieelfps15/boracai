@@ -67,8 +67,8 @@ if (!isset($_SESSION['carrinho'])) {
             </div>
 
 
-            
-                <div class="container col-lg-12">
+
+            <div class="container col-lg-12">
                 <form id="carrinhoForm" method="POST" action="add_carrinho.php">
                     <div class="row">
 
@@ -194,187 +194,247 @@ if (!isset($_SESSION['carrinho'])) {
                         </div>
 
                     </div>
-                </div>
+            </div>
 
 
 
 
 
-                <!-- Modal 1 (Açaí) -->
-                <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modal1Label">Selecione o Açaí</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <!-- Modal 1 (Açaí) -->
+            <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal1Label">Selecione o Açaí</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span style="font-weight: bolder;">Tamanho:</span>
+                            <select class="form-select" name="tamanho_acai" aria-label="Selecionar Tamanho">
+
+                                <?php
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor = 0 and tamanho > 299");
+                                $sth->execute();
+                                foreach ($sth as $res) {
+                                    extract($res); ?>
+                                    <option value="<?= $tamanho ?> - R$ <?= $valor ?>"><?= $tamanho ?> ml - R$ <?= $valor ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                            <span style="font-weight: bolder;">Adicionais:</span>
+                            <div class="div col-lg-12">
+
+                                <?php
+                                $sth = $pdo->prepare("SELECT * FROM adicionais");
+                                $sth->execute();
+                                foreach ($sth as $res) {
+                                    extract($res); ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="adicionais[]" value="<?= $nome_adicional ?> - R$ <?= $valor_adicional ?>" id="adicional_<?= $id_adicional ?>">
+                                        <label for="adicional_<?= $id_adicional ?>">
+                                            <?= $nome_adicional ?> - R$ <?= $valor_adicional ?>
+                                        </label>
+                                    </div>
+                                <?php
+                                }
+                                ?>
                             </div>
-                            <div class="modal-body">
-                                <span style="font-weight: bolder;">Tamanho:</span>
-                                <select class="form-select" name="tamanho_acai" aria-label="Selecionar Tamanho">
-
-                                    <?php
-                                    $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor = 0 and tamanho > 299");
-                                    $sth->execute();
-                                    foreach ($sth as $res) {
-                                        extract($res); ?>
-                                        <option value="<?= $tamanho ?> - R$ <?= $valor ?>"><?= $tamanho ?> ml - R$ <?= $valor ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                                <span style="font-weight: bolder;">Adicionais:</span>
-                                <div class="div col-lg-12">
-
-                                    <?php
-                                    $sth = $pdo->prepare("SELECT * FROM adicionais");
-                                    $sth->execute();
-                                    foreach ($sth as $res) {
-                                        extract($res); ?>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="adicionais[]" value="<?= $nome_adicional ?> - R$ <?= $valor_adicional ?>" id="adicional_<?= $id_adicional ?>">
-                                            <label for="adicional_<?= $id_adicional ?>">
-                                                <?= $nome_adicional ?> - R$ <?= $valor_adicional ?>
-                                            </label>
-                                        </div>
-                                    <?php
-                                    }
-                                    ?>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                                <button type="submit" class="btn btn-success" name="acao" value="adicionar_acai" onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_acai" onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Modal 2 (Bolo) -->
-                <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modal2Label">Selecione o Bolo</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <span style="font-weight: bolder;">Sabores:</span>
-                                <select class="form-select" name="sabor_bolo" aria-label="Selecionar Sabor do Bolo">
-                                    <?php
-                                    $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborbolo s ON s.id_bolo = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0");
-                                    $sth->execute();
-                                    foreach ($sth as $res) {
-                                        extract($res); ?>
-                                        <option value="<?= $sabor_bolo ?> - R$ <?= $valor ?>"><?= $sabor_bolo ?> - R$ <?= $valor ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                                <button type="submit" class="btn btn-success" name="acao" value="adicionar_bolo">Adicionar ao Carrinho</button>
-                            </div>
+            <!-- Modal 2 (Bolo) -->
+            <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal2Label">Selecione o Bolo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span style="font-weight: bolder;">Sabores:</span>
+                            <select class="form-select" name="sabor_bolo" aria-label="Selecionar Sabor do Bolo">
+                                <?php
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborbolo s ON s.id_bolo = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0");
+                                $sth->execute();
+                                foreach ($sth as $res) {
+                                    extract($res); ?>
+                                    <option value="<?= $sabor_bolo ?> - R$ <?= $valor ?>"><?= $sabor_bolo ?> - R$ <?= $valor ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_bolo">Adicionar ao Carrinho</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Modal 4 (torta) -->
-                <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="modal4Label" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modal4Label">Selecione a torta</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <span style="font-weight: bolder;">Sabores:</span>
-                                <select class="form-select" name="torta" aria-label="Selecionar Sabor da Torta">
-                                    <?php
-                                    $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 3");
-                                    $sth->execute();
-                                    foreach ($sth as $res) {
-                                        extract($res); ?>
-                                        <option value="<?= $nome_sabor ?> - R$ <?= $valor ?>"><?= $nome_sabor ?> - R$ <?= $valor ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                                <button type="submit" class="btn btn-success" name="acao" value="adicionar_torta">Adicionar ao Carrinho</button>
-                            </div>
+            <!-- Modal 4 (torta) -->
+            <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="modal4Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal4Label">Selecione a torta</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span style="font-weight: bolder;">Sabores:</span>
+                            <select class="form-select" name="torta" aria-label="Selecionar Sabor da Torta">
+                                <?php
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 3");
+                                $sth->execute();
+                                foreach ($sth as $res) {
+                                    extract($res); ?>
+                                    <option value="<?= $nome_sabor ?> - R$ <?= $valor ?>"><?= $nome_sabor ?> - R$ <?= $valor ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_torta">Adicionar ao Carrinho</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
 
-                <!-- Modal 5 (alfajor) -->
-                <div class="modal fade" id="modal5" tabindex="-1" aria-labelledby="modal5Label" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modal5Label">Selecione o alfajor</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <span style="font-weight: bolder;">Sabores:</span>
-                                <select class="form-select" name="alfajor" aria-label="Selecionar Sabor da Torta">
-                                    <?php
-                                    $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 4");
-                                    $sth->execute();
-                                    foreach ($sth as $res) {
-                                        extract($res); ?>
-                                        <option value="<?= $nome_sabor ?> - R$ <?= $valor ?>"><?= $nome_sabor ?> - R$ <?= $valor ?></option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                                <button type="submit" class="btn btn-success" name="acao" value="adicionar_alfajor">Adicionar ao Carrinho</button>
-                            </div>
+            <!-- Modal 5 (alfajor) -->
+            <div class="modal fade" id="modal5" tabindex="-1" aria-labelledby="modal5Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal5Label">Selecione o alfajor</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span style="font-weight: bolder;">Sabores:</span>
+                            <select class="form-select" name="alfajor" aria-label="Selecionar Sabor da Torta">
+                                <?php
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 4");
+                                $sth->execute();
+                                foreach ($sth as $res) {
+                                    extract($res); ?>
+                                    <option value="<?= $nome_sabor ?> - R$ <?= $valor ?>"><?= $nome_sabor ?> - R$ <?= $valor ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_alfajor">Adicionar ao Carrinho</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <!-- Modal 6 (brigadeiro) -->
+            <div class="modal fade" id="modal6" tabindex="-1" aria-labelledby="modal6Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal6Label">Selecione o brigadeiro</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span style="font-weight: bolder;">Tamanho:</span>
+                            <select class="form-select" name="tamanho_brigadeiro" aria-label="Selecionar Tamanho">
 
+                                <?php
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN itens i on i.id_itens = p.nome_produto WHERE i.id_itens = 5");
+                                $sth->execute();
+                                foreach ($sth as $res) {
+                                    extract($res); ?>
+                                    <option value="<?= $tamanho ?> - R$ <?= $valor ?>"><?= $tamanho ?> Unidade - R$ <?= $valor ?></option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                            <span style="font-weight: bolder;">Sabores</span>
+                            <div class="div col-lg-12">
+                            <?php
+$sth = $pdo->prepare("SELECT * FROM brigadeiro WHERE statusbrigadeiro = 0");
+$sth->execute();
+$sabores = $sth->fetchAll(); // Pega todos os resultados de uma vez
+$quantidadeDeGrupos = 4; // Definir quantos grupos você quer
 
+for ($i = 1; $i <= $quantidadeDeGrupos; $i++) {
+    echo "<span>Sabor $i:</span><br>";
+    echo '<div class="col-lg-12">';
 
-
-
-
-
-
-
-
-
-       
-
-        </form>
-
-        <!-- Modal 3 -->
-        <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modal3Label" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal3Label">Pedido</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    // Exibe todos os botões de rádio dentro de cada grupo
+    foreach ($sabores as $res) {
+        $nome_brigadeiro = htmlspecialchars($res['nome_brigadeiro']); // Evitar problemas de segurança
+        $id_brigadeiro = htmlspecialchars($res['id_brigadeiro']); ?>
+        
+        <div class="form-check form-check-inline">
+            <input class="form-check-input flavor-radio" type="radio" name="sabor_<?= $i ?>" 
+                   value="<?= $nome_brigadeiro ?>" id="sabor_<?= $id_brigadeiro . "_$i" ?>">
+            <label class="form-check-label" for="sabor_<?= $id_brigadeiro . "_$i" ?>">
+                <?= $nome_brigadeiro ?>
+            </label>
+        </div>
+    <?php
+    }
+    echo '</div><br>';
+}
+?>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_brigadeiro" onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <?php
-                        include 'ver_carrinho.php';
-                        ?>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </form>
+
+            <!-- Modal 3 -->
+            <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="modal3Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal3Label">Pedido</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <?php
+                            include 'ver_carrinho.php';
+                            ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </div>
     </div>

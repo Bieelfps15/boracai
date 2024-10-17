@@ -20,6 +20,7 @@ include '../conexao.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" type="imagem/png" href="../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../css/css.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .filter-input {
             margin-bottom: 15px;
@@ -28,6 +29,38 @@ include '../conexao.php';
 
         span {
             font-weight: bolder;
+        }
+
+        .custom-tabs .nav-link {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 15px;
+            color: white;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .custom-tabs .nav-link i {
+            margin-right: 5px;
+        }
+
+        .custom-tabs .nav-link:hover,
+        .custom-tabs .nav-link:focus {
+            background-color: #f0f0f0;
+            color: #007bff;
+        }
+
+        .custom-tabs .nav-link.active {
+            background-color: #007bff;
+            color: #fff;
+            border-bottom: 3px solid #0056b3;
+        }
+
+        .custom-tabs .nav-link.active i {
+            color: #fff;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #ddd;
         }
     </style>
     <title>Itens registrados</title>
@@ -66,27 +99,41 @@ include '../conexao.php';
 
 
             <!-- Definição das abas -->
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <ul class="nav nav-tabs custom-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="menu1-tab" data-bs-toggle="tab" data-bs-target="#menu1" type="button" role="tab" aria-controls="menu1" aria-selected="true">Bolos</button>
+                    <button class="nav-link active" id="menu1-tab" data-bs-toggle="tab" data-bs-target="#menu1" type="button" role="tab" aria-controls="menu1" aria-selected="true">
+                        <i class="fas fa-birthday-cake"></i> Bolos
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="menu2-tab" data-bs-toggle="tab" data-bs-target="#menu2" type="button" role="tab" aria-controls="menu2" aria-selected="false">Açaí</button>
+                    <button class="nav-link" id="menu2-tab" data-bs-toggle="tab" data-bs-target="#menu2" type="button" role="tab" aria-controls="menu2" aria-selected="false">
+                        <i class="fas fa-ice-cream"></i> Açaí
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="menu3-tab" data-bs-toggle="tab" data-bs-target="#menu3" type="button" role="tab" aria-controls="menu3" aria-selected="false">Adicionais</button>
+                    <button class="nav-link" id="menu3-tab" data-bs-toggle="tab" data-bs-target="#menu3" type="button" role="tab" aria-controls="menu3" aria-selected="false">
+                        <i class="fas fa-plus-circle"></i> Adicionais
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="menu4-tab" data-bs-toggle="tab" data-bs-target="#menu4" type="button" role="tab" aria-controls="menu4" aria-selected="false">Torta</button>
+                    <button class="nav-link" id="menu4-tab" data-bs-toggle="tab" data-bs-target="#menu4" type="button" role="tab" aria-controls="menu4" aria-selected="false">
+                        <i class="fas fa-pie-chart"></i> Torta
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="menu5-tab" data-bs-toggle="tab" data-bs-target="#menu5" type="button" role="tab" aria-controls="menu5" aria-selected="false">Alfajor</button>
+                    <button class="nav-link" id="menu5-tab" data-bs-toggle="tab" data-bs-target="#menu5" type="button" role="tab" aria-controls="menu5" aria-selected="false">
+                        <i class="fas fa-cookie"></i> Alfajor
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="menu6-tab" data-bs-toggle="tab" data-bs-target="#menu6" type="button" role="tab" aria-controls="menu6" aria-selected="false">Brigadeiro</button>
+                    <button class="nav-link" id="menu6-tab" data-bs-toggle="tab" data-bs-target="#menu6" type="button" role="tab" aria-controls="menu6" aria-selected="false">
+                        <i class="fas fa-candy-cane"></i> Brigadeiro
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="menu7-tab" data-bs-toggle="tab" data-bs-target="#menu7" type="button" role="tab" aria-controls="menu7" aria-selected="false">Sabores em geral</button>
+                    <button class="nav-link" id="menu7-tab" data-bs-toggle="tab" data-bs-target="#menu7" type="button" role="tab" aria-controls="menu7" aria-selected="false">
+                        <i class="fas fa-list"></i> Sabores em geral
+                    </button>
                 </li>
             </ul>
 
@@ -522,6 +569,54 @@ include '../conexao.php';
                             </tbody>
                         </table>
                     </div>
+
+                    <h3 style="text-align: center;color: white;">Sabores para o brigadeiro</h3>
+
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal8" style="float: right;">Adicionar sabor do brigadeiro</button>
+                    <!-- Campo de busca para brigadeiro -->
+                    <input type="text" id="filterBrigadeiro1" class="form-control filter-input" placeholder="Buscar no sabores para o brigadeiro">
+                    <div class="col-lg-12">
+                        <table id="tabelaBrigadeiro1" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th> Sabor </th>
+                                    <th> Edição </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $sth = $pdo->prepare("SELECT *FROM brigadeiro WHERE statusbrigadeiro = 0");
+                                $sth->execute();
+                                foreach ($sth as $res) {
+                                    extract($res); ?>
+                                    <tr>
+                                        <td><?= $nome_brigadeiro ?></td>
+                                        <td>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro1<?= $id_brigadeiro ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Deletar"></a>
+                                        </td>
+                                    </tr>
+                                    <!-- Modal para confirmar a exclusão -->
+                                    <div class="modal fade" id="modalbrigadeiro1<?= $id_brigadeiro ?>" tabindex="-1" aria-labelledby="modalbrigadeiro1Label<?= $id_brigadeiro ?>" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalbrigadeiro1Label<?= $id_brigadeiro ?>">Excluir o sabor "<?= $nome_brigadeiro ?>"?</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluibrigadeiro.php?id=<?= $id_brigadeiro ?>" class="btn btn-danger">Deletar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
 
@@ -726,6 +821,29 @@ include '../conexao.php';
                     </div>
                 </div>
 
+                <!-- Modal para Adicionar sabores brigadeiro -->
+                <div class="modal fade" id="modal8" tabindex="-1" aria-labelledby="modal8Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal8Label">Adicionar Sabor</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="POST" action="acoes/adicionar/registrarbrigadeiro.php">
+                                <div class="modal-body">
+                                    <span>Nome do sabor:</span>
+                                    <input type="text" class="form-control" name="nome_brigadeiro" placeholder="Adicional" required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-success" name="action">Adicionar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
 
             </div>
         </div>
@@ -796,18 +914,18 @@ include '../conexao.php';
         }
     </script>
 
-    
+
     <!-- Adicione o script para busca e filtro -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
             let filters = document.querySelectorAll('.filter-input');
-    filters.forEach(input => {
-        input.addEventListener('keyup', function() {
-            filterTable(input.id, `tabela${input.id.replace('filter', '')}`);
-        });
-    });
-           
+            filters.forEach(input => {
+                input.addEventListener('keyup', function() {
+                    filterTable(input.id, `tabela${input.id.replace('filter', '')}`);
+                });
+            });
+
         });
         // Função de filtro
         function filterTable(inputId, tableId) {

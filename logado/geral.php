@@ -212,7 +212,46 @@ include 'dashbord/dados.php';
         </div>
       </div>
 
+      <div class="col-xl-4 col-lg-12">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Tortas mais vendidos</h6>
+          </div>
+          <div class="card-body">
+            <div class="chart-area">
+              <canvas id="tortaBarChart" style="height: 600px; width: 70%;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="col-xl-4 col-lg-12">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Alfajor mais vendidos</h6>
+          </div>
+          <div class="card-body">
+            <div class="chart-area">
+              <canvas id="alfajorBarChart" style="height: 600px; width: 70%;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-12">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Combinações de brigadeiros mais vendidos</h6>
+            <div class="dropdown no-arrow">
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-pie1 pt-4 pb-2">
+              <canvas id="myPieChart1" style="height: 600px; width: 70%;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -287,6 +326,35 @@ include 'dashbord/dados.php';
     data: {
       labels: <?php echo json_encode($tamanhos); ?>,
       datasets: [{
+        data: <?php echo json_encode($quantidades1); ?>,
+        backgroundColor: [
+          'rgba(78, 115, 223, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(255, 193, 7, 1)',
+          'rgba(28, 200, 138, 1)',
+          'rgba(54, 185, 204, 1)',
+        ],
+        hoverOffset: 4
+      }],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+        },
+      },
+    },
+  });
+
+  // Dados do gráfico
+  var ctx = document.getElementById("myPieChart1");
+  var myPieChart1 = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: <?php echo json_encode($combinacoes); ?>,
+      datasets: [{
         data: <?php echo json_encode($quantidades); ?>,
         backgroundColor: [
           'rgba(78, 115, 223, 1)',
@@ -308,6 +376,7 @@ include 'dashbord/dados.php';
       },
     },
   });
+
 
   // Dados para o gráfico de barras dos sabores de bolos
   var ctx = document.getElementById("bolosBarChart").getContext('2d');
@@ -465,6 +534,168 @@ include 'dashbord/dados.php';
           label: function(tooltipItem, chart) {
             var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
             return datasetLabel + ': ' + tooltipItem.yLabel; // Exibe a quantidade no tooltip
+          }
+        }
+      },
+    }
+  });
+
+  // Dados para o gráfico de barras das tortas
+  var ctx = document.getElementById("tortaBarChart").getContext('2d');
+  var bolosBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: <?php echo json_encode($sabores_torta); ?>, // Nomes das tortas
+      datasets: [{
+        label: "Quantidade",
+        backgroundColor: "#4e73df",
+        borderColor: "#4e73df",
+        data: <?php echo json_encode($quantidades_torta); ?>, // Quantidades de cada torta
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'Torta'
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            maxTicksLimit: 6
+          },
+          maxBarThickness: 25,
+        }],
+        yAxes: [{
+          ticks: {
+            min: 0,
+            max: Math.max(...<?php echo json_encode($quantidades_torta); ?>) + 2, // Ajusta o máximo com base nos valores das tortas
+            padding: 10,
+            // Inclui um valor de quantidade no eixo y
+            callback: function(value, index, values) {
+              return '' + value;
+            }
+          },
+          gridLines: {
+            color: "rgb(234, 236, 244)",
+            zeroLineColor: "rgb(234, 236, 244)",
+            drawBorder: false,
+            borderDash: [2],
+            zeroLineBorderDash: [2]
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+        callbacks: {
+          label: function(tooltipItem, chart) {
+            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+            return datasetLabel + ': ' + tooltipItem.yLabel;
+          }
+        }
+      },
+    }
+  });
+
+  // Dados para o gráfico de barras das alfajor
+  var ctx = document.getElementById("alfajorBarChart").getContext('2d');
+  var bolosBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: <?php echo json_encode($sabores_alfajor); ?>, // Nomes das alfajor
+      datasets: [{
+        label: "Quantidade",
+        backgroundColor: "#4e73df",
+        borderColor: "#4e73df",
+        data: <?php echo json_encode($quantidades_alfajor); ?>, // Quantidades de cada alfajor
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 10,
+          right: 25,
+          top: 25,
+          bottom: 0
+        }
+      },
+      scales: {
+        xAxes: [{
+          time: {
+            unit: 'Torta'
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          },
+          ticks: {
+            maxTicksLimit: 6
+          },
+          maxBarThickness: 25,
+        }],
+        yAxes: [{
+          ticks: {
+            min: 0,
+            max: Math.max(...<?php echo json_encode($quantidades_alfajor); ?>) + 2, // Ajusta o máximo com base nos valores das tortas
+            padding: 10,
+            // Inclui um valor de quantidade no eixo y
+            callback: function(value, index, values) {
+              return '' + value;
+            }
+          },
+          gridLines: {
+            color: "rgb(234, 236, 244)",
+            zeroLineColor: "rgb(234, 236, 244)",
+            drawBorder: false,
+            borderDash: [2],
+            zeroLineBorderDash: [2]
+          }
+        }],
+      },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        titleMarginBottom: 10,
+        titleFontColor: '#6e707e',
+        titleFontSize: 14,
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+        callbacks: {
+          label: function(tooltipItem, chart) {
+            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+            return datasetLabel + ': ' + tooltipItem.yLabel;
           }
         }
       },
