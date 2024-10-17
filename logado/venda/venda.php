@@ -213,7 +213,7 @@ if (!isset($_SESSION['carrinho'])) {
                                 <select class="form-select" name="tamanho_acai" aria-label="Selecionar Tamanho">
 
                                     <?php
-                                    $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor = 0");
+                                    $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor = 0 and tamanho > 299");
                                     $sth->execute();
                                     foreach ($sth as $res) {
                                         extract($res); ?>
