@@ -132,7 +132,7 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editarbolo.php">
+                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarbolo.php">
                                                         <span>Preço atual: R$ <?= $valor ?> </span></br>
                                                         <span>Novo preço:</span>
                                                         <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
@@ -156,8 +156,8 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Deletar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -207,7 +207,7 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editartamanho.php">
+                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editartamanho.php">
                                                         <span>Preço atual: R$ <?= $valor ?> </span></br>
                                                         <span>Novo preço:</span>
                                                         <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
@@ -269,7 +269,7 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="formEdit<?= $id_adicional ?>" method="POST" action="acoes/editaradicional.php">
+                                                    <form id="formEdit<?= $id_adicional ?>" method="POST" action="acoes/editar/editaradicional.php">
                                                         <span>Preço atual: R$ <?= $valor_adicional ?> </span></br>
                                                         <span>Novo preço:</span>
                                                         <input type="hidden" name="id_adicional" value="<?= $id_adicional ?>">
@@ -293,8 +293,8 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/excluiradicional.php?id=<?= $id_adicional ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluiradicional.php?id=<?= $id_adicional ?>" class="btn btn-danger">Deletar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -313,7 +313,7 @@ include '../conexao.php';
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal4" style="float: right;">Adicionar torta</button>
 
                     <!-- Campo de busca para torta -->
-                    <input type="text" id="filterBolos" class="form-control filter-input" placeholder="Buscar nas Torta">
+                    <input type="text" id="filterTorta" class="form-control filter-input" placeholder="Buscar nas Torta">
 
                     <div class="col-lg-12">
                         <table id="tabelaTorta" class="table table-striped table-bordered">
@@ -347,11 +347,11 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editarbolo.php">
+                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editartorta.php">
                                                         <span>Preço atual: R$ <?= $valor ?> </span></br>
                                                         <span>Novo preço:</span>
                                                         <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
-                                                        <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do bolo">
+                                                        <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo da torta">
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
@@ -371,8 +371,8 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Deletar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -425,7 +425,7 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editaralfajar.php">
+                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editaralfajar.php">
                                                         <span>Preço atual: R$ <?= $valor ?> </span></br>
                                                         <span>Novo preço:</span>
                                                         <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
@@ -449,8 +449,8 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Deletar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -493,7 +493,7 @@ include '../conexao.php';
                                         </td>
                                     </tr>
 
-                                    <!-- Modal para edição do açai -->
+                                    <!-- Modal para edição do brigadeiro -->
                                     <div class="modal fade" id="modalbrigadeiro<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalbrigadeiroLabel<?= $id_produto ?>" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -502,7 +502,7 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editarbrigadeiro.php">
+                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarbrigadeiro.php">
                                                         <span>Preço atual: R$ <?= $valor ?> </span></br>
                                                         <span>Novo preço:</span>
                                                         <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
@@ -567,8 +567,8 @@ include '../conexao.php';
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/excluirsabor.php?id=<?= $id_geral ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluirsabor.php?id=<?= $id_geral ?>" class="btn btn-danger">Deletar</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -584,9 +584,6 @@ include '../conexao.php';
 
 
 
-
-
-
                 <!-- Modal para Adicionar Bolo -->
                 <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
                     <div class="modal-dialog">
@@ -595,7 +592,7 @@ include '../conexao.php';
                                 <h5 class="modal-title" id="modal1Label">Adicionar Bolo</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form method="POST" action="acoes/registrarbolo.php">
+                            <form method="POST" action="acoes/adicionar/registrarbolo.php">
                                 <div class="modal-body">
                                     <span>Sabor:</span>
                                     <input type="text" class="form-control" name="sabor" placeholder="Sabor do bolo" required>
@@ -603,8 +600,8 @@ include '../conexao.php';
                                     <input type="text" class="form-control" name="valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço do bolo">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                    <button type="submit" class="btn btn-primary" name="action">Adicionar</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-success" name="action">Adicionar</button>
                                 </div>
                             </form>
                         </div>
@@ -619,7 +616,7 @@ include '../conexao.php';
                                 <h5 class="modal-title" id="modal2Label">Adicionar Bolo</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form method="POST" action="acoes/registraradicionais.php">
+                            <form method="POST" action="acoes/adicionar/registraradicionais.php">
                                 <div class="modal-body">
                                     <span>Nome do adicional:</span>
                                     <input type="text" class="form-control" name="nome_adicional" placeholder="Adicional" required>
@@ -627,14 +624,85 @@ include '../conexao.php';
                                     <input type="text" class="form-control" name="valor_adicional" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço do adicional">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                    <button type="submit" class="btn btn-primary" name="action">Adicionar</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-success" name="action">Adicionar</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
 
+                <!-- Modal para Adicionar torta -->
+                <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="modal4Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal4Label">Adicionar Torta</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <span>Sabor da torta:</span>
+                                <form method="POST" action="acoes/adicionar/registrartorta.php">
+                                    <select required class='form-select' name="sabores">
+                                        <option value='' disabled selected>Escolha um sabor</option>
+                                        <?php
+                                        $sth = $pdo->prepare("SELECT * FROM saborgeral where statusgeral = 0");
+                                        $sth->execute();
+                                        foreach ($sth as $res) {
+                                            extract($res); ?>
+                                            <option value="<?= $id_geral ?>"><?= $nome_sabor ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span>Preço:</span>
+                                    <input type="text" class="form-control" name="valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço da torta">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-success" name="action">Adicionar</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal para Adicionar alfajor -->
+                <div class="modal fade" id="modal5" tabindex="-1" aria-labelledby="modal5Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal5Label">Adicionar Alfajor</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body">
+                                <span>Sabor do alfajor:</span>
+                                <form method="POST" action="acoes/adicionar/registraralfajor.php">
+                                    <select required class='form-select' name="sabores">
+                                        <option value='' disabled selected>Escolha um sabor</option>
+                                        <?php
+                                        $sth = $pdo->prepare("SELECT * FROM saborgeral where statusgeral = 0");
+                                        $sth->execute();
+                                        foreach ($sth as $res) {
+                                            extract($res); ?>
+                                            <option value="<?= $id_geral ?>"><?= $nome_sabor ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span>Preço:</span>
+                                    <input type="text" class="form-control" name="valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço da torta">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-success" name="action">Adicionar</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Modal para Adicionar sabores -->
                 <div class="modal fade" id="modal7" tabindex="-1" aria-labelledby="modal7Label" aria-hidden="true">
@@ -644,14 +712,14 @@ include '../conexao.php';
                                 <h5 class="modal-title" id="modal7Label">Adicionar Sabor</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form method="POST" action="acoes/registrarsabor.php">
+                            <form method="POST" action="acoes/adicionar/registrarsabor.php">
                                 <div class="modal-body">
                                     <span>Nome do sabor:</span>
                                     <input type="text" class="form-control" name="nome_sabor" placeholder="Adicional" required>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                    <button type="submit" class="btn btn-primary" name="action">Adicionar</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-success" name="action">Adicionar</button>
                                 </div>
                             </form>
                         </div>
@@ -681,11 +749,11 @@ include '../conexao.php';
                 l = "",
                 o = window.Event ? t.which : t.keyCode;
 
-            if (o === 13 || o === 8) return true; 
+            if (o === 13 || o === 8) return true;
 
             n = String.fromCharCode(o);
 
-            if (n < '0' || n > '9') return false; 
+            if (n < '0' || n > '9') return false;
 
             u = a.value.length;
 
@@ -698,7 +766,7 @@ include '../conexao.php';
                 }
             }
 
-            l += n; 
+            l += n;
 
             if (l.length === 0) {
                 a.value = "";
@@ -722,68 +790,25 @@ include '../conexao.php';
                 for (h = tamanho2 - 1; h >= 0; h--) {
                     a.value += ajd2.charAt(h);
                 }
-                a.value += r + l.substr(l.length - 2, 2); 
+                a.value += r + l.substr(l.length - 2, 2);
             }
-            return false; 
+            return false;
         }
     </script>
 
-    <script>
-        // Modal 1: Foco no input quando o modal é mostrado
-        var modal1 = document.getElementById('modal1');
-        var inputModal1 = document.getElementById('inputModal1');
-
-        modal1.addEventListener('shown.bs.modal', function() {
-            inputModal1.focus();
-        });
-
-        // Modal 2: Foco no input quando o modal é mostrado
-        var modal2 = document.getElementById('modal2');
-        var inputModal2 = document.getElementById('inputModal2');
-
-        modal2.addEventListener('shown.bs.modal', function() {
-            inputModal2.focus();
-        });
-
-        // Modal 3: Foco no input quando o modal é mostrado
-        var modal3 = document.getElementById('modal3');
-        var inputModal3 = document.getElementById('inputModal3');
-
-        modal3.addEventListener('shown.bs.modal', function() {
-            inputModal3.focus();
-        });
-    </script>
+    
     <!-- Adicione o script para busca e filtro -->
     <script>
-        // Filtros para cada tabela
-        document.getElementById('filterBolos').addEventListener('keyup', function() {
-            filterTable('filterBolos', 'tabelaBolos');
-        });
+        document.addEventListener('DOMContentLoaded', function() {
 
-        document.getElementById('filterAcai').addEventListener('keyup', function() {
-            filterTable('filterAcai', 'tabelaAcai');
+            let filters = document.querySelectorAll('.filter-input');
+    filters.forEach(input => {
+        input.addEventListener('keyup', function() {
+            filterTable(input.id, `tabela${input.id.replace('filter', '')}`);
         });
-
-        document.getElementById('filterAdicionais').addEventListener('keyup', function() {
-            filterTable('filterAdicionais', 'tabelaAdicionais');
+    });
+           
         });
-
-        document.getElementById('filterTorta').addEventListener('keyup', function() {
-            filterTable('filterTorta', 'tabelaTorta');
-        });
-
-        document.getElementById('filterAlfajor').addEventListener('keyup', function() {
-            filterTable('filterAlfajor', 'tabelaAlfajor');
-        });
-
-        document.getElementById('filterBrigadeiro').addEventListener('keyup', function() {
-            filterTable('filterBrigadeiro', 'tabelaBrigadeiro');
-        });
-
-        document.getElementById('filterSabores').addEventListener('keyup', function() {
-            filterTable('filterSabores', 'tabelaSabores');
-        });
-
         // Função de filtro
         function filterTable(inputId, tableId) {
             let input = document.getElementById(inputId);

@@ -1,6 +1,6 @@
 <?php
 
-include '../../conexao.php';
+include '../../../conexao.php';
 
 $id_adicional = filter_input(INPUT_POST, 'id_adicional', FILTER_DEFAULT);
 $novo_valor = str_replace(",", ".", str_replace(".", "", $_POST['valor_adicional'])); 
@@ -12,4 +12,4 @@ $sth->bindValue(":id_adicional", $id_adicional, PDO::PARAM_INT);
 $sth->execute();
 
 
-header("LOCATION:../itens.php");
+header("LOCATION: ../../itens.php");

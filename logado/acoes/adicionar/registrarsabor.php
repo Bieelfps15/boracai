@@ -1,6 +1,6 @@
 <?php
 
-include '../../conexao.php';
+include '../../../conexao.php';
 
 $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
@@ -20,7 +20,7 @@ $sth = $pdo->prepare($Create);
 $sth->execute($Dados);
 echo $pdo->lastInsertId();
 
-header("LOCATION: ../itens.php");
+header("LOCATION: ../../itens.php");
 
 
 ?>

@@ -28,14 +28,14 @@ if (isset($_POST['action'])) {
 
             $pdo->commit();
 
-            header("Location: ../itens.php?msg=Bolo adicionado com sucesso!");
+            header("Location: ../../itens.php?msg=Bolo adicionado com sucesso!");
             exit();
         } catch (Exception $e) {
             $pdo->rollBack();
             die("Erro ao adicionar o bolo: " . $e->getMessage());
         }
     } else {
-        header("Location: ../itens.php?msg=Preencha todos os campos!");
+        header("Location: ../../itens.php?msg=Preencha todos os campos!");
         exit();
     }
 }
