@@ -73,24 +73,25 @@ foreach ($sth_bolo as $row) {
 }
 
 $sql_adicional = "SELECT 
-            TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) AS Adicional,
-            COUNT(*) AS Quantidade_Adicional
-        FROM 
-            pedido pd
-        JOIN 
-            (
-                SELECT 
-                    1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 
-                    UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 
-                    UNION ALL SELECT 9 UNION ALL SELECT 10 -- Ajuste este número para o máximo de adicionais
-            ) numbers ON CHAR_LENGTH(pd.adicionais) - CHAR_LENGTH(REPLACE(pd.adicionais, ',', '')) >= numbers.n - 1
-        WHERE 
-            TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) <> 'Nenhum'
-            AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) <> ''
-        GROUP BY 
-            Adicional
-        ORDER BY 
-            Adicional;";
+    TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) AS Adicional,
+    COUNT(*) AS Quantidade_Adicional
+FROM 
+    pedido pd
+JOIN 
+    (
+        SELECT 
+            1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 
+            UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 
+            UNION ALL SELECT 9 UNION ALL SELECT 10 -- Ajuste este número para o máximo de adicionais
+    ) numbers ON CHAR_LENGTH(pd.adicionais) - CHAR_LENGTH(REPLACE(pd.adicionais, ',', '')) >= numbers.n - 1
+WHERE 
+    pd.nomeproduto LIKE '%açai%'  -- Use LIKE para incluir possíveis variações
+    AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) <> 'Nenhum'
+    AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) <> ''
+GROUP BY 
+    Adicional
+ORDER BY 
+    Adicional;";
 
 $sth_adicional = $pdo->prepare($sql_adicional);
 $sth_adicional->execute();
