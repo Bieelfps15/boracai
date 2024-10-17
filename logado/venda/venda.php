@@ -67,9 +67,9 @@ if (!isset($_SESSION['carrinho'])) {
             </div>
 
 
-            <form id="carrinhoForm" method="POST" action="add_carrinho.php">
+            
                 <div class="container col-lg-12">
-
+                <form id="carrinhoForm" method="POST" action="add_carrinho.php">
                     <div class="row">
 
                         <div class="col-xl-4 col-sm-6 col-12">
@@ -82,7 +82,7 @@ if (!isset($_SESSION['carrinho'])) {
                                                     <img src="../../img/acai.png" alt="Logo" style="width: 40px;">
                                                 </div>
                                                 <div class="media-body text-right">
-                                                    <h3>Adicionar copo de açaí</h3>
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar copo de açaí</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,7 +103,7 @@ if (!isset($_SESSION['carrinho'])) {
                                                     <img src="../../img/bolo.png" alt="Logo" style="width: 40px;">
                                                 </div>
                                                 <div class="media-body text-right">
-                                                    <h3>Adicionar Bolo de pote</h3>
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar Bolo de pote</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -120,10 +120,70 @@ if (!isset($_SESSION['carrinho'])) {
                                         <div class="card-body">
                                             <div class="media d-flex">
                                                 <div class="align-self-center">
+                                                    <img src="../../img/torta.png" alt="Logo" style="width: 40px;">
+                                                </div>
+                                                <div class="media-body text-right">
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar Torta</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                            </br>
+                        </div>
+
+                        <div class="col-xl-4 col-sm-6 col-12">
+                            <div class="card">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modal5">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="align-self-center">
+                                                    <img src="../../img/alfajor.png" alt="Logo" style="width: 40px;">
+                                                </div>
+                                                <div class="media-body text-right">
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar Alfajor</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                            </br>
+                        </div>
+
+                        <div class="col-xl-4 col-sm-6 col-12">
+                            <div class="card">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modal6">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="align-self-center">
+                                                    <img src="../../img/brigadeiro.png" alt="Logo" style="width: 40px;">
+                                                </div>
+                                                <div class="media-body text-right">
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar Brigadeiro</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                            </br>
+                        </div>
+
+                        <div class="col-xl-4 col-sm-6 col-12">
+                            <div class="card">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modal7">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="media d-flex">
+                                                <div class="align-self-center">
                                                     <img src="../../img/outrosprodutos.png" alt="Logo" style="width: 40px;">
                                                 </div>
                                                 <div class="media-body text-right">
-                                                    <h3>Adicionar outro produto</h3>
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar outro produto</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,7 +278,80 @@ if (!isset($_SESSION['carrinho'])) {
                         </div>
                     </div>
                 </div>
-        </div>
+
+                <!-- Modal 4 (torta) -->
+                <div class="modal fade" id="modal4" tabindex="-1" aria-labelledby="modal4Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal4Label">Selecione a torta</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <span style="font-weight: bolder;">Sabores:</span>
+                                <select class="form-select" name="torta" aria-label="Selecionar Sabor da Torta">
+                                    <?php
+                                    $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 3");
+                                    $sth->execute();
+                                    foreach ($sth as $res) {
+                                        extract($res); ?>
+                                        <option value="<?= $nome_sabor ?> - R$ <?= $valor ?>"><?= $nome_sabor ?> - R$ <?= $valor ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-success" name="acao" value="adicionar_torta">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal 5 (alfajor) -->
+                <div class="modal fade" id="modal5" tabindex="-1" aria-labelledby="modal5Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal5Label">Selecione o alfajor</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <span style="font-weight: bolder;">Sabores:</span>
+                                <select class="form-select" name="alfajor" aria-label="Selecionar Sabor da Torta">
+                                    <?php
+                                    $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 4");
+                                    $sth->execute();
+                                    foreach ($sth as $res) {
+                                        extract($res); ?>
+                                        <option value="<?= $nome_sabor ?> - R$ <?= $valor ?>"><?= $nome_sabor ?> - R$ <?= $valor ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-success" name="acao" value="adicionar_alfajor">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+       
 
         </form>
 
@@ -241,6 +374,8 @@ if (!isset($_SESSION['carrinho'])) {
                 </div>
             </div>
         </div>
+    </div>
+
     </div>
     </div>
 </body>

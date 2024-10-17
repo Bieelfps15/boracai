@@ -48,6 +48,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
             'sabor' => $sabor_bolo,
             'valor' => $valor_bolo
         ];
+    } elseif ($_POST['acao'] == 'adicionar_torta') {
+        $sabor_torta = $_POST['torta'];
+        $valor_torta = floatval(explode(" - R$", $sabor_torta)[1]);
+
+        // Adiciona a torta ao carrinho
+        $_SESSION['carrinho'][] = [
+            'tipo' => 'torta',
+            'sabor' => $sabor_torta,
+            'valor' => $valor_torta
+        ];
+    } elseif ($_POST['acao'] == 'adicionar_alfajor') {
+        $sabor_alfajor = $_POST['alfajor'];
+        $valor_alfajor = floatval(explode(" - R$", $sabor_alfajor)[1]);
+
+        // Adiciona a torta ao carrinho
+        $_SESSION['carrinho'][] = [
+            'tipo' => 'alfajor',
+            'sabor' => $sabor_alfajor,
+            'valor' => $valor_alfajor
+        ];
     }
 }
 

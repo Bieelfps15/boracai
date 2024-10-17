@@ -27,6 +27,16 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
             echo "<td>{$item['sabor']}</td>";
             echo "<td>N/A</td>"; // Não há adicionais para bolo
             echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
+        } elseif ($item['tipo'] == 'torta') {
+            echo "<td>{$item['tipo']}</td>";
+            echo "<td>{$item['sabor']}</td>";
+            echo "<td>N/A</td>"; // Não há adicionais para torta
+            echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
+        } elseif ($item['tipo'] == 'alfajor') {
+            echo "<td>{$item['tipo']}</td>";
+            echo "<td>{$item['sabor']}</td>";
+            echo "<td>N/A</td>"; // Não há adicionais para alfajor
+            echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
         }
 
         echo "<td>
