@@ -34,7 +34,7 @@ $sql = "SELECT
         GROUP BY 
             date_range.date
         ORDER BY 
-            date_range.date DESC"; 
+            date_range.date DESC";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
@@ -48,18 +48,18 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 }
 
 $sql_bolo = "SELECT 
-            TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(p.nomeproduto, ' - ', -1), 'R$', 1)) AS Sabor,
-            COUNT(*) AS Quantidade
-        FROM 
-            pedido p
-        WHERE 
-            p.nomeproduto NOT LIKE '%Açai%'
-            AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(p.nomeproduto, ' - ', -1), 'R$', 1)) <> ''
-            AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(p.nomeproduto, ' - ', -1), 'R$', 1)) NOT REGEXP '^[0-9]+$' 
-        GROUP BY 
-            Sabor
-        ORDER BY 
-            Sabor;";
+    TRIM(REPLACE(REPLACE(SUBSTRING_INDEX(SUBSTRING_INDEX(p.nomeproduto, ' - ', -1), 'R$', 1), 'Bolo de ', ''), 'bolo de ', '')) AS Sabor,
+    COUNT(*) AS Quantidade
+FROM 
+    pedido p
+WHERE 
+    p.nomeproduto LIKE 'bolo%'
+    AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(p.nomeproduto, ' - ', -1), 'R$', 1)) <> ''
+    AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(p.nomeproduto, ' - ', -1), 'R$', 1)) NOT REGEXP '^[0-9]+$'
+GROUP BY 
+    Sabor
+ORDER BY 
+    Sabor";
 
 $sth_bolo = $pdo->prepare($sql_bolo);
 $sth_bolo->execute();
@@ -103,5 +103,4 @@ foreach ($sth_adicional as $row) {
     $quantidades_adicionais[] = $row['Quantidade_Adicional'];
 }
 
-$pdo = null; 
-?>
+$pdo = null;

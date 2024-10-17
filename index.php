@@ -30,7 +30,7 @@
                             </div>
                             <input type="text" name="nome" class="form-control input_user" value="" placeholder="Nome">
                         </div>
-                        <div class="input-group mb-2">
+                        <div class="input-group mb-4">
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <i class="fas fa-key" style="width:13px;"></i>
@@ -38,15 +38,9 @@
                             </div>
                             <input type="password" id="senha" name="senha" class="form-control input_pass" value="" placeholder="Senha">
                             <div class="input-group-append">
-                                <button  type="button" id="togglePassword" class="btn btn-outline-secondary">
+                                <button type="button" id="togglePassword" class="btn" style="background-color: #a53893; color: #fff;">
                                     <i class="fas fa-eye" id="eyeIcon"></i>
                                 </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customControlInline">
-                                <label class="custom-control-label" for="customControlInline">Lembre-me</label>
                             </div>
                         </div>
                         <button type="submit" name="submit" id="submit" class="btn login_btn form-btn">Entrar</button>

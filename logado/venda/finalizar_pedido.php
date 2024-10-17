@@ -70,9 +70,21 @@ if (isset($_SESSION['boracai']['id_pessoa'])) {
 foreach ($_SESSION['carrinho'] as $item) {
     // Ajusta o nome do produto
     if ($item['tipo'] == 'açaí') {
-        $nome_produto = explode(" - R$", $item['tamanho'])[0]; 
+        $nome_produto_base = $item['nome'];
+        $tamanho = explode(" - R$", $item['tamanho'])[0]; 
+        $nome_produto = $nome_produto_base . " " . $tamanho;
     } elseif ($item['tipo'] == 'bolo') {
-        $nome_produto = explode(" - R$", $item['sabor'])[0];
+        $nome_produto_base = $item['nome'];
+        $sabor = explode(" - R$", $item['sabor'])[0];
+        $nome_produto = $nome_produto_base . " de " . $sabor;
+    } elseif ($item['tipo'] == 'torta') {
+        $nome_produto_base = $item['nome'];
+        $sabor = explode(" - R$", $item['sabor'])[0];
+        $nome_produto = $nome_produto_base . " de " . $sabor;
+    } elseif ($item['tipo'] == 'alfajor') {
+        $nome_produto_base = $item['nome'];
+        $sabor = explode(" - R$", $item['sabor'])[0];
+        $nome_produto = $nome_produto_base . " de " . $sabor;
     }
 
     // Remove o valor do nome dos adicionais
@@ -92,9 +104,6 @@ foreach ($_SESSION['carrinho'] as $item) {
 // Limpe o carrinho após finalizar o pedido
 unset($_SESSION['carrinho']);
 
-echo "<script>
-    alert('Pedido finalizado com sucesso!');
-    location.href='venda.php';
-</script>";
+echo "<script>alert('Pedido finalizado com sucesso!');location.href='venda.php';</script>";
 
 ?>

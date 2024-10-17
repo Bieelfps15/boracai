@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
 
         // Adiciona o açaí ao carrinho
         $_SESSION['carrinho'][] = [
+            'nome' => 'Açaí',
             'tipo' => 'açaí',
             'tamanho' => $tamanho_acai,
             'adicionais' => $adicionais,
@@ -44,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
 
         // Adiciona o bolo ao carrinho
         $_SESSION['carrinho'][] = [
+            'nome' => 'Bolo',
             'tipo' => 'bolo',
             'sabor' => $sabor_bolo,
             'valor' => $valor_bolo
@@ -54,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
 
         // Adiciona a torta ao carrinho
         $_SESSION['carrinho'][] = [
+            'nome' => 'Torta',
             'tipo' => 'torta',
             'sabor' => $sabor_torta,
             'valor' => $valor_torta
@@ -64,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
 
         // Adiciona a torta ao carrinho
         $_SESSION['carrinho'][] = [
+            'nome' => 'Alfajor',
             'tipo' => 'alfajor',
             'sabor' => $sabor_alfajor,
             'valor' => $valor_alfajor

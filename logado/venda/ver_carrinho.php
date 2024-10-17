@@ -52,7 +52,7 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
     echo "</table>";
     echo "</div>";
 
-    echo "<h4 class='text-end'>Total do Pedido: R$ " . number_format($total_pedido, 2, ',', '.') . "</h4>";
+    echo "<h4 class='text-end'>Total: R$ " . number_format($total_pedido, 2, ',', '.') . "</h4>";
 
     echo "<h5 class='text-center my-4'>Escolha a Forma de Pagamento</h5>";
     echo "<form method='POST' action='finalizar_pedido.php' class='text-center my-4'>";
