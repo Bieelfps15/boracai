@@ -22,7 +22,7 @@ include '../conexao.php';
     <style>
         .filter-input {
             margin-bottom: 15px;
-            max-width: 300px;
+            max-width: 180px;
         }
 
         span {

@@ -24,8 +24,8 @@ include 'dashbord/dados.php';
   <title>Dashbord</title>
   <style>
     .navbar-nav a:hover {
-            transform: scale(1.1);
-        }
+      transform: scale(1.1);
+    }
   </style>
 </head>
 
@@ -367,6 +367,9 @@ include 'dashbord/dados.php';
           'rgba(255, 193, 7, 1)',
           'rgba(28, 200, 138, 1)',
           'rgba(54, 185, 204, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(255, 159, 64, 1)',
         ],
         hoverOffset: 4
       }],

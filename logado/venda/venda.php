@@ -248,7 +248,7 @@ if (!isset($_SESSION['carrinho'])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_acai" onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_acai" onclick="adicionarAoCarrinho()">Adicionar ao pedido</button>
                         </div>
                     </div>
                 </div>
@@ -278,7 +278,7 @@ if (!isset($_SESSION['carrinho'])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_bolo">Adicionar ao Carrinho</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_bolo">Adicionar ao pedido</button>
                         </div>
                     </div>
                 </div>
@@ -308,7 +308,7 @@ if (!isset($_SESSION['carrinho'])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_torta">Adicionar ao Carrinho</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_torta">Adicionar ao pedido</button>
                         </div>
                     </div>
                 </div>
@@ -339,7 +339,7 @@ if (!isset($_SESSION['carrinho'])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_alfajor">Adicionar ao Carrinho</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_alfajor">Adicionar ao pedido</button>
                         </div>
                     </div>
                 </div>
@@ -400,7 +400,7 @@ if (!isset($_SESSION['carrinho'])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_brigadeiro" onclick="adicionarAoCarrinho()">Adicionar ao Carrinho</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_brigadeiro" onclick="adicionarAoCarrinho()">Adicionar ao pedido</button>
                         </div>
                     </div>
                 </div>
