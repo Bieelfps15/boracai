@@ -25,6 +25,11 @@ if (!isset($_SESSION['carrinho'])) {
     <link rel="icon" type="imagem/png" href="../../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../../css/css.css">
     <title>Registrar venda</title>
+    <style>
+        .navbar-nav a:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 
 <body>
@@ -364,33 +369,33 @@ if (!isset($_SESSION['carrinho'])) {
                             </select>
                             <span style="font-weight: bolder;">Sabores</span>
                             <div class="div col-lg-12">
-                            <?php
-$sth = $pdo->prepare("SELECT * FROM brigadeiro WHERE statusbrigadeiro = 0");
-$sth->execute();
-$sabores = $sth->fetchAll(); // Pega todos os resultados de uma vez
-$quantidadeDeGrupos = 4; // Definir quantos grupos você quer
+                                <?php
+                                $sth = $pdo->prepare("SELECT * FROM brigadeiro WHERE statusbrigadeiro = 0");
+                                $sth->execute();
+                                $sabores = $sth->fetchAll(); // Pega todos os resultados de uma vez
+                                $quantidadeDeGrupos = 4; // Definir quantos grupos você quer
 
-for ($i = 1; $i <= $quantidadeDeGrupos; $i++) {
-    echo "<span>Sabor $i:</span><br>";
-    echo '<div class="col-lg-12">';
+                                for ($i = 1; $i <= $quantidadeDeGrupos; $i++) {
+                                    echo "<span>Sabor $i:</span><br>";
+                                    echo '<div class="col-lg-12">';
 
-    // Exibe todos os botões de rádio dentro de cada grupo
-    foreach ($sabores as $res) {
-        $nome_brigadeiro = htmlspecialchars($res['nome_brigadeiro']); // Evitar problemas de segurança
-        $id_brigadeiro = htmlspecialchars($res['id_brigadeiro']); ?>
-        
-        <div class="form-check form-check-inline">
-            <input class="form-check-input flavor-radio" type="radio" name="sabor_<?= $i ?>" 
-                   value="<?= $nome_brigadeiro ?>" id="sabor_<?= $id_brigadeiro . "_$i" ?>">
-            <label class="form-check-label" for="sabor_<?= $id_brigadeiro . "_$i" ?>">
-                <?= $nome_brigadeiro ?>
-            </label>
-        </div>
-    <?php
-    }
-    echo '</div><br>';
-}
-?>
+                                    // Exibe todos os botões de rádio dentro de cada grupo
+                                    foreach ($sabores as $res) {
+                                        $nome_brigadeiro = htmlspecialchars($res['nome_brigadeiro']); // Evitar problemas de segurança
+                                        $id_brigadeiro = htmlspecialchars($res['id_brigadeiro']); ?>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input flavor-radio" type="radio" name="sabor_<?= $i ?>"
+                                                value="<?= $nome_brigadeiro ?>" id="sabor_<?= $id_brigadeiro . "_$i" ?>">
+                                            <label class="form-check-label" for="sabor_<?= $id_brigadeiro . "_$i" ?>">
+                                                <?= $nome_brigadeiro ?>
+                                            </label>
+                                        </div>
+                                <?php
+                                    }
+                                    echo '</div><br>';
+                                }
+                                ?>
                             </div>
                         </div>
                         <div class="modal-footer">

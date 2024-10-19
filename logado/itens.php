@@ -62,6 +62,34 @@ include '../conexao.php';
         .nav-tabs {
             border-bottom: 2px solid #ddd;
         }
+
+        /* Ícones de edição */
+        .modal-trigger img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .modal-trigger img:hover {
+            transform: scale(1.2);
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table thead {
+            background-color: #343a40;
+            color: white;
+        }
+        
+        .navbar-nav a:hover {
+            transform: scale(1.1);
+        }
     </style>
     <title>Itens registrados</title>
 </head>
@@ -149,7 +177,7 @@ include '../conexao.php';
 
                     <div class="col-lg-12">
                         <table id="tabelaBolos" class="table table-striped table-bordered">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th> Sabor </th>
                                     <th> Valor </th>
@@ -224,7 +252,7 @@ include '../conexao.php';
                     <input type="text" id="filterAcai" class="form-control filter-input" placeholder="Buscar no Açaí">
                     <div class="col-lg-12">
                         <table id="tabelaAcai" class="table table-striped table-bordered">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th> Tamanho </th>
                                     <th> Valor </th>
@@ -285,7 +313,7 @@ include '../conexao.php';
 
                     <div class="col-lg-12">
                         <table id="tabelaAdicionais" class="table table-striped table-bordered">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th> Nome </th>
                                     <th> Valor </th>
@@ -356,7 +384,7 @@ include '../conexao.php';
 
                 <!-- Aba de torta -->
                 <div id="menu4" class="tab-pane fade" role="tabpanel" aria-labelledby="menu4-tab">
-                    <h3 style="text-align: center;color: white;">Tortas</h3>
+                    <h3 style="text-align: center;color: white;">TORTAS</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal4" style="float: right;">Adicionar torta</button>
 
                     <!-- Campo de busca para torta -->
@@ -364,7 +392,7 @@ include '../conexao.php';
 
                     <div class="col-lg-12">
                         <table id="tabelaTorta" class="table table-striped table-bordered">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th> Sabor </th>
                                     <th> Valor </th>
@@ -434,7 +462,7 @@ include '../conexao.php';
 
                 <!-- Aba de alfajor -->
                 <div id="menu5" class="tab-pane fade" role="tabpanel" aria-labelledby="menu5-tab">
-                    <h3 style="text-align: center;color: white;">Alfajor</h3>
+                    <h3 style="text-align: center;color: white;">ALFAJOR</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal5" style="float: right;">Adicionar Alfajor</button>
 
                     <!-- Campo de busca para alfajor -->
@@ -442,7 +470,7 @@ include '../conexao.php';
 
                     <div class="col-lg-12">
                         <table id="tabelaAlfajor" class="table table-striped table-bordered">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th> Sabor </th>
                                     <th> Valor </th>
@@ -514,12 +542,12 @@ include '../conexao.php';
 
                 <!-- Aba de brigadeiro -->
                 <div id="menu6" class="tab-pane fade" role="tabpanel" aria-labelledby="menu6-tab">
-                    <h3 style="text-align: center;color: white;">Brigadeiro</h3>
+                    <h3 style="text-align: center;color: white;">BRIGADEIRO</h3>
                     <!-- Campo de busca para brigadeiro -->
                     <input type="text" id="filterBrigadeiro" class="form-control filter-input" placeholder="Buscar no brigadeiro">
                     <div class="col-lg-12">
                         <table id="tabelaBrigadeiro" class="table table-striped table-bordered">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th> Quantidade </th>
                                     <th> Valor </th>
@@ -570,14 +598,14 @@ include '../conexao.php';
                         </table>
                     </div>
 
-                    <h3 style="text-align: center;color: white;">Sabores para o brigadeiro</h3>
+                    <h3 style="text-align: center;color: white;">SABORES PARA O BRIGADEIRO</h3>
 
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal8" style="float: right;">Adicionar sabor do brigadeiro</button>
                     <!-- Campo de busca para brigadeiro -->
                     <input type="text" id="filterBrigadeiro1" class="form-control filter-input" placeholder="Buscar no sabores para o brigadeiro">
                     <div class="col-lg-12">
                         <table id="tabelaBrigadeiro1" class="table table-striped table-bordered">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th> Sabor </th>
                                     <th> Edição </th>
@@ -626,7 +654,7 @@ include '../conexao.php';
 
                 <!-- Aba de sabores -->
                 <div id="menu7" class="tab-pane fade" role="tabpanel" aria-labelledby="menu7-tab">
-                    <h3 style="text-align: center;color: white;">Sabores</h3>
+                    <h3 style="text-align: center;color: white;">SABORES</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal7" style="float: right;">Adicionar Sabor</button>
 
                     <!-- Campo de busca para Sabores -->
@@ -634,7 +662,7 @@ include '../conexao.php';
 
                     <div class="col-lg-12">
                         <table id="tabelaSabores" class="table table-striped table-bordered">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th> Sabor </th>
                                     <th> Edição </th>
@@ -642,7 +670,7 @@ include '../conexao.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM saborgeral where id_geral > 0 and statusgeral = 0;");
+                                $sth = $pdo->prepare("SELECT *FROM saborgeral where id_geral > 0 and statusgeral = 0;");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>

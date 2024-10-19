@@ -22,6 +22,11 @@ include 'dashbord/dados.php';
   <link rel="stylesheet" type="text/css" href="../css/css.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashbord</title>
+  <style>
+    .navbar-nav a:hover {
+            transform: scale(1.1);
+        }
+  </style>
 </head>
 
 <body>

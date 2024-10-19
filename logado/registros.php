@@ -35,6 +35,17 @@ include 'tabela/tabela.php';
         .dataTables_wrapper .dataTables_filter label {
             color: white;
         }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .navbar-nav a:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 
@@ -69,7 +80,7 @@ include 'tabela/tabela.php';
             <h2 style="text-align: center;color: white;">Registros de pedidos</h2>
             <div class="table-responsive">
                 <table id="recordsTable" class="table table-striped table-bordered">
-                    <thead>
+                <thead class="thead-dark" style="background-color: #343a40; color: white;">
                         <tr>
                             <th>Pedido</th>
                             <th>Produto vendido</th>
