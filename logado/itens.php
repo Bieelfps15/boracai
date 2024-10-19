@@ -86,7 +86,7 @@ include '../conexao.php';
             background-color: #343a40;
             color: white;
         }
-        
+
         .navbar-nav a:hover {
             transform: scale(1.1);
         }
@@ -136,11 +136,6 @@ include '../conexao.php';
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="menu2-tab" data-bs-toggle="tab" data-bs-target="#menu2" type="button" role="tab" aria-controls="menu2" aria-selected="false">
                         <i class="fas fa-ice-cream"></i> Açaí
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="menu3-tab" data-bs-toggle="tab" data-bs-target="#menu3" type="button" role="tab" aria-controls="menu3" aria-selected="false">
-                        <i class="fas fa-plus-circle"></i> Adicionais
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -302,10 +297,7 @@ include '../conexao.php';
                             </tbody>
                         </table>
                     </div>
-                </div>
 
-                <!-- Aba de Adicionais -->
-                <div id="menu3" class="tab-pane fade" role="tabpanel" aria-labelledby="menu3-tab">
                     <h3 style="text-align: center;color: white;">ADICIONAIS</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal2" style="float: right;">Adicionar adicional</button>
                     <!-- Campo de busca para Adicionais -->
@@ -381,6 +373,7 @@ include '../conexao.php';
                         </table>
                     </div>
                 </div>
+
 
                 <!-- Aba de torta -->
                 <div id="menu4" class="tab-pane fade" role="tabpanel" aria-labelledby="menu4-tab">

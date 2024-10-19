@@ -82,10 +82,10 @@ JOIN
         SELECT 
             1 AS n UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 
             UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 
-            UNION ALL SELECT 9 UNION ALL SELECT 10 -- Ajuste este número para o máximo de adicionais
+            UNION ALL SELECT 9 UNION ALL SELECT 10
     ) numbers ON CHAR_LENGTH(pd.adicionais) - CHAR_LENGTH(REPLACE(pd.adicionais, ',', '')) >= numbers.n - 1
 WHERE 
-    pd.nomeproduto LIKE '%açai%'  -- Use LIKE para incluir possíveis variações
+    pd.nomeproduto LIKE '%açai%'  
     AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) <> 'Nenhum'
     AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) <> ''
 GROUP BY 
@@ -157,8 +157,7 @@ foreach ($sth_alfajor as $row) {
 }
 
 
-$sql = "
-SELECT 
+$sql = "SELECT 
     combinacao_adicional,
     COUNT(*) AS quantidade
 FROM (
@@ -184,15 +183,15 @@ FROM (
 ) AS subquery
 GROUP BY 
     combinacao_adicional
+    HAVING 
+    combinacao_adicional <> 'nenhum'
 ORDER BY 
-    quantidade DESC;
-";
+    quantidade DESC";
 
 $sth = $pdo->prepare($sql);
 $sth->execute();
 $resultados = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-// Inicializando arrays para as combinações e quantidades
 $combinacoes = [];
 $quantidades = [];
 
