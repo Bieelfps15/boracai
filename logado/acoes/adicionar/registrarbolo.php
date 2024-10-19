@@ -8,7 +8,7 @@ try {
 }
 
 if (isset($_POST['action'])) {
-    $sabor = trim($_POST['sabor']);  
+    $sabor = mb_strtoupper(mb_substr(trim($_POST['sabor']), 0, 1), 'UTF-8') . mb_strtolower(mb_substr(trim($_POST['sabor']), 1), 'UTF-8');
     $valor = str_replace(",", ".", str_replace(".", "", $_POST['valor'])); 
 
     if (!empty($sabor) && !empty($valor)) {

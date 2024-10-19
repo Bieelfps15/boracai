@@ -24,7 +24,7 @@ if (!isset($_SESSION['carrinho'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" type="imagem/png" href="../../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../../css/css.css">
-    <title>Registrar venda</title>
+    <title>Fazer venda</title>
     <style>
         .navbar-nav a:hover {
             transform: scale(1.1);
@@ -231,7 +231,7 @@ if (!isset($_SESSION['carrinho'])) {
                             <div class="div col-lg-12">
 
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM adicionais");
+                                $sth = $pdo->prepare("SELECT * FROM adicionais WHERE status_adicional = 0");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
@@ -266,7 +266,7 @@ if (!isset($_SESSION['carrinho'])) {
                             <span style="font-weight: bolder;">Sabores:</span>
                             <select class="form-select" name="sabor_bolo" aria-label="Selecionar Sabor do Bolo">
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborbolo s ON s.id_bolo = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborbolo s ON s.id_bolo = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0 and status = 0");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
@@ -296,7 +296,7 @@ if (!isset($_SESSION['carrinho'])) {
                             <span style="font-weight: bolder;">Sabores:</span>
                             <select class="form-select" name="torta" aria-label="Selecionar Sabor da Torta">
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 3");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 3 and statusgeral = 0");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
@@ -327,7 +327,7 @@ if (!isset($_SESSION['carrinho'])) {
                             <span style="font-weight: bolder;">Sabores:</span>
                             <select class="form-select" name="alfajor" aria-label="Selecionar Sabor da Torta">
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 4");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 4 and statusgeral = 0");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>

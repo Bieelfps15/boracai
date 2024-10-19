@@ -4,11 +4,12 @@ include '../../../conexao.php';
 
 $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
+$nomeAdicional = mb_strtoupper(mb_substr(trim($post['nome_adicional']), 0, 1), 'UTF-8') . mb_strtolower(mb_substr(trim($post['nome_adicional']), 1), 'UTF-8');
 $valorConvertido = str_replace(',', '.', str_replace('.', '', $post['valor_adicional']));
 $status = 0;
 
 $Dados = array(
-    'nome_adicional' => $post['nome_adicional'],
+    'nome_adicional' => $nomeAdicional,
     'valor_adicional' => $valorConvertido,
     'status_adicional' => $status 
 );

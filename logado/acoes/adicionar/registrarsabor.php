@@ -3,11 +3,11 @@
 include '../../../conexao.php';
 
 $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
+$nomeSabor = mb_strtoupper(mb_substr(trim($post['nome_sabor']), 0, 1), 'UTF-8') . mb_strtolower(mb_substr(trim($post['nome_sabor']), 1), 'UTF-8');
 $status = 0;
 
 $Dados = array(
-    'nome_sabor' => $post['nome_sabor'],
+    'nome_sabor' => $nomeSabor,
     'statusgeral' => $status 
 );
 

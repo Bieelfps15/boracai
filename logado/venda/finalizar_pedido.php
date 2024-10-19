@@ -86,7 +86,7 @@ foreach ($_SESSION['carrinho'] as $item) {
     } elseif ($item['tipo'] == 'brigadeiro') {
         $nome_produto_base = $item['nome'];
         $tamanho = $item['tamanho'];
-        $nome_produto = $nome_produto_base . " (" . $tamanho . ")";
+        $nome_produto = $nome_produto_base . " (" . $tamanho . " un.)";
     }
 
     // Captura os adicionais

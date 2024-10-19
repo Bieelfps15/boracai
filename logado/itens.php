@@ -14,13 +14,11 @@ include '../conexao.php';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="imagem/png" href="../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../css/css.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .filter-input {
             margin-bottom: 15px;
@@ -222,12 +220,15 @@ include '../conexao.php';
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Excluir o bolo "<?= $sabor_bolo ?>"?</h5>
+                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o bolo "<?= $sabor_bolo ?>"?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <div class="modal-body">
+                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -243,8 +244,6 @@ include '../conexao.php';
                 <!-- Aba de Açaí -->
                 <div id="menu2" class="tab-pane fade" role="tabpanel" aria-labelledby="menu2-tab">
                     <h3 style="text-align: center;color: white;">AÇAÍ</h3>
-                    <!-- Campo de busca para Açaí -->
-                    <input type="text" id="filterAcai" class="form-control filter-input" placeholder="Buscar no Açaí">
                     <div class="col-lg-12">
                         <table id="tabelaAcai" class="table table-striped table-bordered">
                             <thead class="thead-dark">
@@ -356,12 +355,15 @@ include '../conexao.php';
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirAdicionalLabel<?= $id_adicional ?>">Excluir o adicional "<?= $nome_adicional ?>"?</h5>
+                                                    <h5 class="modal-title" id="modalExcluirAdicionalLabel<?= $id_adicional ?>">Remover o adicional "<?= $nome_adicional ?>"?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <div class="modal-body">
+                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluiradicional.php?id=<?= $id_adicional ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluiradicional.php?id=<?= $id_adicional ?>" class="btn btn-danger">Remover</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -394,7 +396,7 @@ include '../conexao.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and statusgeral = 0 and i.id_itens = 3;");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and status = 0 and i.id_itens = 3;");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
@@ -435,12 +437,15 @@ include '../conexao.php';
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Excluir o bolo "<?= $sabor_bolo ?>"?</h5>
+                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover a torta "<?= $sabor_bolo ?>"?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <div class="modal-body">
+                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -472,7 +477,7 @@ include '../conexao.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and statusgeral = 0 and i.id_itens = 4;");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and status = 0 and i.id_itens = 4;");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
@@ -513,12 +518,15 @@ include '../conexao.php';
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Excluir o alfajar "<?= $nome_sabor ?>"?</h5>
+                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o alfajar "<?= $nome_sabor ?>"?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <div class="modal-body">
+                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -536,8 +544,6 @@ include '../conexao.php';
                 <!-- Aba de brigadeiro -->
                 <div id="menu6" class="tab-pane fade" role="tabpanel" aria-labelledby="menu6-tab">
                     <h3 style="text-align: center;color: white;">BRIGADEIRO</h3>
-                    <!-- Campo de busca para brigadeiro -->
-                    <input type="text" id="filterBrigadeiro" class="form-control filter-input" placeholder="Buscar no brigadeiro">
                     <div class="col-lg-12">
                         <table id="tabelaBrigadeiro" class="table table-striped table-bordered">
                             <thead class="thead-dark">
@@ -566,7 +572,7 @@ include '../conexao.php';
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalbrigadeiroLabel<?= $id_produto ?>">Editar valor do tamanho <?= $tamanho ?></h5>
+                                                    <h5 class="modal-title" id="modalbrigadeiroLabel<?= $id_produto ?>">Editar valor da quantidade: <?= $tamanho ?> un.</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -621,12 +627,15 @@ include '../conexao.php';
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalbrigadeiro1Label<?= $id_brigadeiro ?>">Excluir o sabor "<?= $nome_brigadeiro ?>"?</h5>
+                                                    <h5 class="modal-title" id="modalbrigadeiro1Label<?= $id_brigadeiro ?>">Remover o sabor "<?= $nome_brigadeiro ?>"?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <div class="modal-body">
+                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluibrigadeiro.php?id=<?= $id_brigadeiro ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluibrigadeiro.php?id=<?= $id_brigadeiro ?>" class="btn btn-danger">Remover</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -670,21 +679,24 @@ include '../conexao.php';
                                     <tr>
                                         <td><?= $nome_sabor ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_geral ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluirsab<?= $id_geral ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
                                         </td>
                                     </tr>
 
                                     <!-- Modal para confirmar a exclusão -->
-                                    <div class="modal fade" id="modalExcluir<?= $id_geral ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_geral ?>" aria-hidden="true">
+                                    <div class="modal fade" id="modalExcluirsab<?= $id_geral ?>" tabindex="-1" aria-labelledby="modalExcluirsabLabel<?= $id_geral ?>" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_geral ?>">Excluir o sabor "<?= $nome_sabor ?>"?</h5>
+                                                    <h5 class="modal-title" id="modalExcluirsabLabel<?= $id_geral ?>">Remover o sabor "<?= $nome_sabor ?>"?</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
+                                                <div class="modal-body">
+                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluirsabor.php?id=<?= $id_geral ?>" class="btn btn-danger">Deletar</a>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluirsabor.php?id=<?= $id_geral ?>" class="btn btn-danger">Remover</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -729,7 +741,7 @@ include '../conexao.php';
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modal2Label">Adicionar Bolo</h5>
+                                <h5 class="modal-title" id="modal2Label">Adicionar adicionais</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form method="POST" action="acoes/adicionar/registraradicionais.php">

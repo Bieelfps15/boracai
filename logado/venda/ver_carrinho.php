@@ -63,11 +63,11 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
     echo "<form method='POST' action='finalizar_pedido.php' class='text-center my-4'>";
     echo "<select name='forma_pagamento' required class='form-select'>";
     echo "<option value='' disabled selected>Selecione uma forma de pagamento</option>";
-    echo "<option value='credito'>Débito</option>";
-    echo "<option value='debito'>Crédito</option>";
-    echo "<option value='dinheiro'>Dinheiro</option>";
-    echo "<option value='pix'>Pix</option>";
-    echo "<option value='ifood'>Ifood</option>";
+    echo "<option value='Crédito'>Crédito</option>";
+    echo "<option value='Débito'>Débito</option>";
+    echo "<option value='Dinheiro'>Dinheiro</option>";
+    echo "<option value='Pix'>Pix</option>";
+    echo "<option value='Ifood'>Ifood</option>";
     echo "</select>";
 
     echo "<input type='hidden' name='valor_total' id='valor_total' value='" . number_format($total_pedido, 2, '.', '') . "'>";

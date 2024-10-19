@@ -23,7 +23,7 @@ include 'tabela/tabela.php';
     <link rel="icon" type="imagem/png" href="../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../css/css.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Dashbord</title>
+    <title>Vendas realizadas</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <style>
         .dataTables_wrapper .dataTables_paginate,
@@ -83,12 +83,12 @@ include 'tabela/tabela.php';
                 <thead class="thead-dark" style="background-color: #343a40; color: white;">
                         <tr>
                             <th>Pedido</th>
+                            <th>Data</th>
                             <th>Produto vendido</th>
                             <th>Adicional</th>
                             <th>Forma de Pagamento</th>
                             <th>Taxa de entrega</th>
                             <th>Valor total</th>
-                            <th>Responsável</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,12 +96,12 @@ include 'tabela/tabela.php';
                             foreach ($pedidos as $pedido) {
                                 echo "<tr>";
                                 echo "<td>" . htmlspecialchars($pedido['numeropedido']) . "</td>";
+                                echo "<td>" . htmlspecialchars($pedido['data_pedido']) . "</td>";
                                 echo "<td>" . htmlspecialchars($pedido['produtos_vendidos']) . "</td>";
                                 echo "<td>" . (empty($pedido['adicionais']) ? 'Nenhum' : htmlspecialchars($pedido['adicionais'])) . "</td>";
                                 echo "<td>" . htmlspecialchars($pedido['pagamento']) . "</td>";
                                 echo "<td>R$ " . number_format($pedido['taxaentrega'], 2, ',', '.') . "</td>";
                                 echo "<td>R$ " . number_format($pedido['valortotal'], 2, ',', '.') . "</td>";
-                                echo "<td>" . htmlspecialchars($pedido['responsavel']) . "</td>";
                                 echo "</tr>";
                             }
                         ?>

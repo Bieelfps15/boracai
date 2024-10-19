@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
             $saboresString = implode(", ", $saboresSelecionados);
 
             $_SESSION['carrinho'][] = [
-                'nome' => 'Brigadeiro 4 Uni.',
+                'nome' => 'Brigadeiro',
                 'tipo' => 'brigadeiro',
                 'tamanho' => $tamanho_brigadeiro,
                 'sabores' => $saboresString,

@@ -4,10 +4,11 @@ include '../../../conexao.php';
 
 $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
+$nomeBrigadeiro = mb_strtoupper(mb_substr(trim($post['nome_brigadeiro']), 0, 1), 'UTF-8') . mb_strtolower(mb_substr(trim($post['nome_brigadeiro']), 1), 'UTF-8');
 $status = 0;
 
 $Dados = array(
-    'nome_brigadeiro' => $post['nome_brigadeiro'],
+    'nome_brigadeiro' => $nomeBrigadeiro,
     'statusbrigadeiro' => $status 
 );
 
