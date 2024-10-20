@@ -54,22 +54,8 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-    document.getElementById('togglePassword').addEventListener('click', function () {
-    const senhaInput = document.getElementById('senha');
-    const eyeIcon = document.getElementById('eyeIcon');
-    
-    if (senhaInput.type === 'password') {
-        senhaInput.type = 'text';
-        eyeIcon.classList.remove('fa-eye'); // Troca para ícone "ocultar"
-        eyeIcon.classList.add('fa-eye-slash');
-    } else {
-        senhaInput.type = 'password';
-        eyeIcon.classList.remove('fa-eye-slash'); // Troca para ícone "mostrar"
-        eyeIcon.classList.add('fa-eye');
-    }
-});
-</script>
+    <script src="js/script.js"></script>
+
 </body>
 
 

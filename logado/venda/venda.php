@@ -24,12 +24,9 @@ if (!isset($_SESSION['carrinho'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" type="imagem/png" href="../../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../../css/css.css">
+    <link rel="stylesheet" type="text/css" href="../../css/styles.css">
     <title>Fazer venda</title>
-    <style>
-        .navbar-nav a:hover {
-            transform: scale(1.1);
-        }
-    </style>
+   
 </head>
 
 <body>
@@ -445,66 +442,11 @@ if (!isset($_SESSION['carrinho'])) {
     </div>
 </body>
 
-
+<script src="../../js/script.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-    var modal1 = document.getElementById('modal1');
-    var inputModal1 = document.getElementById('inputModal1');
 
-    modal1.addEventListener('shown.bs.modal', function() {
-        inputModal1.focus();
-    });
-    // Seleciona o modal do Açaí pelo ID
-    var acaiModal = document.getElementById('modal1');
-    // Adiciona um evento que será executado ao fechar o modal
-    acaiModal.addEventListener('hidden.bs.modal', function() {
-        // Limpar checkboxes ao fechar o modal
-        acaiModal.addEventListener('hidden.bs.modal', function() {
-            limparCheckboxes(acaiModal);
-        });
-
-        // Função para adicionar o item ao carrinho e limpar os checkboxes
-        function adicionarAoCarrinho() {
-            // Lógica para adicionar o item ao carrinho (aqui você implementa a adição)
-            console.log("Item adicionado ao carrinho!");
-
-            // Limpa os checkboxes após adicionar ao carrinho
-            limparCheckboxes(acaiModal);
-        }
-
-        // Função para desmarcar os checkboxes no modal do Açaí
-        function limparCheckboxes(modal) {
-            var checkboxes = modal.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = false;
-            });
-        }
-        // Desmarca todos os checkboxes dentro do modal
-        var checkboxes = acaiModal.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = false;
-        });
-    });
-
-    // Modal 2: Foco no input quando o modal é mostrado
-    var modal2 = document.getElementById('modal2');
-    var inputModal2 = document.getElementById('inputModal2');
-
-    modal2.addEventListener('shown.bs.modal', function() {
-        inputModal2.focus();
-    });
-
-
-    // Modal 3: Foco no input quando o modal é mostrado
-    var modal3 = document.getElementById('modal3');
-    var inputModal3 = document.getElementById('inputModal3');
-
-    modal3.addEventListener('shown.bs.modal', function() {
-        inputModal3.focus();
-    });
-</script>
 
 </html>

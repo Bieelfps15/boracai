@@ -22,31 +22,10 @@ include 'tabela/tabela.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="icon" type="imagem/png" href="../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../css/css.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Vendas realizadas</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <style>
-        .dataTables_wrapper .dataTables_paginate,
-        .dataTables_wrapper .dataTables_info {
-            color: white;
-        }
-
-        .dataTables_wrapper .dataTables_length label,
-        .dataTables_wrapper .dataTables_filter label {
-            color: white;
-        }
-
-        .table {
-            border-radius: 10px;
-            overflow: hidden;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .navbar-nav a:hover {
-            transform: scale(1.1);
-        }
-    </style>
 </head>
 
 <body>
@@ -80,7 +59,7 @@ include 'tabela/tabela.php';
             <h2 style="text-align: center;color: white;">Registros de pedidos</h2>
             <div class="table-responsive">
                 <table id="recordsTable" class="table table-striped table-bordered">
-                <thead class="thead-dark" style="background-color: #343a40; color: white;">
+                    <thead class="thead-dark" style="background-color: #343a40; color: white;">
                         <tr>
                             <th>Pedido</th>
                             <th>Data</th>
@@ -93,17 +72,17 @@ include 'tabela/tabela.php';
                     </thead>
                     <tbody>
                         <?php
-                            foreach ($pedidos as $pedido) {
-                                echo "<tr>";
-                                echo "<td>" . htmlspecialchars($pedido['numeropedido']) . "</td>";
-                                echo "<td>" . htmlspecialchars($pedido['data_pedido']) . "</td>";
-                                echo "<td>" . htmlspecialchars($pedido['produtos_vendidos']) . "</td>";
-                                echo "<td>" . (empty($pedido['adicionais']) ? 'Nenhum' : htmlspecialchars($pedido['adicionais'])) . "</td>";
-                                echo "<td>" . htmlspecialchars($pedido['pagamento']) . "</td>";
-                                echo "<td>R$ " . number_format($pedido['taxaentrega'], 2, ',', '.') . "</td>";
-                                echo "<td>R$ " . number_format($pedido['valortotal'], 2, ',', '.') . "</td>";
-                                echo "</tr>";
-                            }
+                        foreach ($pedidos as $pedido) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($pedido['numeropedido']) . "</td>";
+                            echo "<td>" . htmlspecialchars($pedido['data_pedido']) . "</td>";
+                            echo "<td>" . htmlspecialchars($pedido['produtos_vendidos']) . "</td>";
+                            echo "<td>" . (empty($pedido['adicionais']) ? 'Nenhum' : htmlspecialchars($pedido['adicionais'])) . "</td>";
+                            echo "<td>" . htmlspecialchars($pedido['pagamento']) . "</td>";
+                            echo "<td>R$ " . number_format($pedido['taxaentrega'], 2, ',', '.') . "</td>";
+                            echo "<td>R$ " . number_format($pedido['valortotal'], 2, ',', '.') . "</td>";
+                            echo "</tr>";
+                        }
                         ?>
                     </tbody>
                 </table>

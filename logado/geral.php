@@ -14,6 +14,7 @@ include 'dashbord/dados.php';
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../css/styles.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
@@ -22,11 +23,6 @@ include 'dashbord/dados.php';
   <link rel="stylesheet" type="text/css" href="../css/css.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashbord</title>
-  <style>
-    .navbar-nav a:hover {
-      transform: scale(1.1);
-    }
-  </style>
 </head>
 
 <body>
@@ -152,7 +148,7 @@ include 'dashbord/dados.php';
                                                                       ?></div>
                 </div>
                 <div class="col-auto">
-                  <i class="fas fa-dollar-sign text-warning fa-2x text-gray-300"></i>
+                  <i class="fas fa-comment-dollar text-warning fa-2x text-gray-300"></i>
                 </div>
               </div>
             </div>
@@ -163,7 +159,7 @@ include 'dashbord/dados.php';
       <div class="col-xl-12 col-lg-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Vendas de cada dia</h6>
+            <h6 class="m-0 font-weight-bold text-primary fas fa-chart-line"> Vendas de cada dia</h6>
           </div>
           <div class="card-body">
             <div class="chart-area">
@@ -177,7 +173,7 @@ include 'dashbord/dados.php';
       <div class="col-xl-4 col-lg-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Copos de açaí mais vendidos</h6>
+            <h6 class="m-0 font-weight-bold text-primary fas fa-chart-pie"> Copos de açaí mais vendidos</h6>
             <div class="dropdown no-arrow">
             </div>
           </div>
@@ -193,7 +189,7 @@ include 'dashbord/dados.php';
       <div class="col-xl-4 col-lg-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Sabores de Bolos mais vendidos</h6>
+            <h6 class="m-0 font-weight-bold text-primary fas fa-chart-bar"> Sabores de Bolos mais vendidos</h6>
           </div>
           <div class="card-body">
             <div class="chart-bar">
@@ -207,7 +203,7 @@ include 'dashbord/dados.php';
       <div class="col-xl-4 col-lg-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Adicionais mais vendidos</h6>
+            <h6 class="m-0 font-weight-bold text-primary fas fa-chart-bar"> Adicionais mais vendidos</h6>
           </div>
           <div class="card-body">
             <div class="chart-area">
@@ -220,7 +216,7 @@ include 'dashbord/dados.php';
       <div class="col-xl-4 col-lg-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Tortas mais vendidos</h6>
+            <h6 class="m-0 font-weight-bold text-primary fas fa-chart-bar"> Tortas mais vendidos</h6>
           </div>
           <div class="card-body">
             <div class="chart-area">
@@ -233,7 +229,7 @@ include 'dashbord/dados.php';
       <div class="col-xl-4 col-lg-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Alfajor mais vendidos</h6>
+            <h6 class="m-0 font-weight-bold text-primary fas fa-chart-bar"> Alfajor mais vendidos</h6>
           </div>
           <div class="card-body">
             <div class="chart-area">
@@ -246,7 +242,7 @@ include 'dashbord/dados.php';
       <div class="col-xl-4 col-lg-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Combinações de brigadeiros mais vendidos</h6>
+            <h6 class="m-0 font-weight-bold text-primary fas fa-chart-pie"> Combinações de brigadeiros mais vendidos</h6>
             <div class="dropdown no-arrow">
             </div>
           </div>

@@ -19,76 +19,7 @@ include '../conexao.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="imagem/png" href="../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../css/css.css">
-    <style>
-        .filter-input {
-            margin-bottom: 15px;
-            max-width: 180px;
-        }
-
-        span {
-            font-weight: bolder;
-        }
-
-        .custom-tabs .nav-link {
-            font-size: 16px;
-            font-weight: bold;
-            padding: 10px 15px;
-            color: white;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .custom-tabs .nav-link i {
-            margin-right: 5px;
-        }
-
-        .custom-tabs .nav-link:hover,
-        .custom-tabs .nav-link:focus {
-            background-color: #f0f0f0;
-            color: #007bff;
-        }
-
-        .custom-tabs .nav-link.active {
-            background-color: #007bff;
-            color: #fff;
-            border-bottom: 3px solid #0056b3;
-        }
-
-        .custom-tabs .nav-link.active i {
-            color: #fff;
-        }
-
-        .nav-tabs {
-            border-bottom: 2px solid #ddd;
-        }
-
-        /* Ícones de edição */
-        .modal-trigger img {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .modal-trigger img:hover {
-            transform: scale(1.2);
-        }
-
-        .table {
-            border-radius: 10px;
-            overflow: hidden;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .table thead {
-            background-color: #343a40;
-            color: white;
-        }
-
-        .navbar-nav a:hover {
-            transform: scale(1.1);
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <title>Itens registrados</title>
 </head>
 
@@ -883,7 +814,7 @@ include '../conexao.php';
     </div>
 
 
-
+    <script src="../js/script.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -892,97 +823,7 @@ include '../conexao.php';
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-    <script language="javascript">
-        function moeda(a, e, r, t) {
-            let n = "",
-                h = 0,
-                u = 0,
-                l = "",
-                o = window.Event ? t.which : t.keyCode;
-
-            if (o === 13 || o === 8) return true;
-
-            n = String.fromCharCode(o);
-
-            if (n < '0' || n > '9') return false;
-
-            u = a.value.length;
-
-            for (h = 0; h < u && (a.value.charAt(h) === '0' || a.value.charAt(h) === r); h++);
-
-            l = "";
-            for (; h < u; h++) {
-                if ("0123456789".indexOf(a.value.charAt(h)) !== -1) {
-                    l += a.value.charAt(h);
-                }
-            }
-
-            l += n;
-
-            if (l.length === 0) {
-                a.value = "";
-            } else if (l.length === 1) {
-                a.value = "0" + r + "0" + l;
-            } else if (l.length === 2) {
-                a.value = "0" + r + l;
-            } else {
-                let ajd2 = "";
-                for (h = l.length - 3, j = 0; h >= 0; h--) {
-                    if (j === 3) {
-                        ajd2 += e;
-                        j = 0;
-                    }
-                    ajd2 += l.charAt(h);
-                    j++;
-                }
-
-                a.value = "";
-                let tamanho2 = ajd2.length;
-                for (h = tamanho2 - 1; h >= 0; h--) {
-                    a.value += ajd2.charAt(h);
-                }
-                a.value += r + l.substr(l.length - 2, 2);
-            }
-            return false;
-        }
-    </script>
-
-
-    <!-- Adicione o script para busca e filtro -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            let filters = document.querySelectorAll('.filter-input');
-            filters.forEach(input => {
-                input.addEventListener('keyup', function() {
-                    filterTable(input.id, `tabela${input.id.replace('filter', '')}`);
-                });
-            });
-
-        });
-        // Função de filtro
-        function filterTable(inputId, tableId) {
-            let input = document.getElementById(inputId);
-            let filter = input.value.toLowerCase();
-            let table = document.getElementById(tableId);
-            let tr = table.getElementsByTagName('tr');
-
-            for (let i = 1; i < tr.length; i++) {
-                let td = tr[i].getElementsByTagName('td');
-                let match = false;
-
-                for (let j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        if (td[j].innerHTML.toLowerCase().indexOf(filter) > -1) {
-                            match = true;
-                            break;
-                        }
-                    }
-                }
-                tr[i].style.display = match ? "" : "none";
-            }
-        }
-    </script>
+    
 
 </body>
 
