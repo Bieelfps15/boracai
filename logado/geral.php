@@ -21,6 +21,7 @@ include 'dashbord/dados.php';
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="icon" type="imagem/png" href="../img/boraçai.png" />
   <link rel="stylesheet" type="text/css" href="../css/css.css">
+  <link rel="stylesheet" href="../css/itens.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Dashbord</title>
 </head>
@@ -36,9 +37,9 @@ include 'dashbord/dados.php';
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active" href="geral.php"><img src="../img/grafico.png" class="navbar-toggler-icon" alt="Logo"> Dashbord</a>
-          <a class="nav-link" href="venda/venda.php"><img src="../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Venda</a>
-          <a class="nav-link" href="registros.php"><img src="../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Registros</a>
-          <a class="nav-link" href="itens.php"><img src="../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Itens</a>
+          <a class="nav-link" href="venda/venda.php"><img src="../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Registrar pedido</a>
+          <a class="nav-link" href="registros.php"><img src="../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Histórico de pedidos</a>
+          <a class="nav-link" href="itens.php"><img src="../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Produtos</a>
           <a class="nav-link" href="controle.php"><img src="../img/controle.png" class="navbar-toggler-icon" alt="Logo"> Controle de estoque</a>
           <a class="nav-link" href="../login/sair.php"> <img src="../img/sair.png" class="navbar-toggler-icon" alt="Logo">Sair</a>
         </div>
@@ -157,7 +158,7 @@ include 'dashbord/dados.php';
       </div>
 
       <div class="col-xl-12 col-lg-12">
-        <div class="card shadow mb-4">
+        <div class="card shadow">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary fas fa-chart-line"> Vendas de cada dia</h6>
           </div>
@@ -169,6 +170,9 @@ include 'dashbord/dados.php';
         </div>
       </div>
 
+      <header>
+        <h2>Análise de vendas por produto</h2>
+      </header>
 
       <div class="col-xl-4 col-lg-12">
         <div class="card shadow mb-4">
@@ -185,21 +189,6 @@ include 'dashbord/dados.php';
         </div>
       </div>
 
-
-      <div class="col-xl-4 col-lg-12">
-        <div class="card shadow mb-4">
-          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary fas fa-chart-bar"> Sabores de Bolos mais vendidos</h6>
-          </div>
-          <div class="card-body">
-            <div class="chart-bar">
-              <canvas id="bolosBarChart" style="height: 600px; width: 70%;"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
       <div class="col-xl-4 col-lg-12">
         <div class="card shadow mb-4">
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -208,6 +197,19 @@ include 'dashbord/dados.php';
           <div class="card-body">
             <div class="chart-area">
               <canvas id="adicionaisBarChart" style="height: 600px; width: 70%;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-12">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary fas fa-chart-bar"> Sabores de bolos mais vendidos</h6>
+          </div>
+          <div class="card-body">
+            <div class="chart-bar">
+              <canvas id="bolosBarChart" style="height: 600px; width: 70%;"></canvas>
             </div>
           </div>
         </div>

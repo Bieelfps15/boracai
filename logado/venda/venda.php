@@ -25,8 +25,9 @@ if (!isset($_SESSION['carrinho'])) {
     <link rel="icon" type="imagem/png" href="../../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../../css/css.css">
     <link rel="stylesheet" type="text/css" href="../../css/styles.css">
-    <title>Fazer venda</title>
-   
+    <link rel="stylesheet" type="text/css" href="../../css/venda.css">
+    <title>Registrar pedido</title>
+
 </head>
 
 <body>
@@ -42,9 +43,9 @@ if (!isset($_SESSION['carrinho'])) {
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="navbar-nav">
                                 <a class="nav-link" href="../geral.php"><img src="../../img/grafico.png" class="navbar-toggler-icon" alt="Logo"> Dashbord</a>
-                                <a class="nav-link active" href="venda.php"><img src="../../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Venda</a>
-                                <a class="nav-link" href="../registros.php"><img src="../../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Registros</a>
-                                <a class="nav-link" href="../itens.php"><img src="../../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Itens</a>
+                                <a class="nav-link active" href="venda.php"><img src="../../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Registrar pedido</a>
+                                <a class="nav-link" href="../registros.php"><img src="../../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Histórico de pedidos</a>
+                                <a class="nav-link" href="../itens.php"><img src="../../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Produtos</a>
                                 <a class="nav-link" href="../controle.php"><img src="../../img/controle.png" class="navbar-toggler-icon" alt="Logo"> Controle de estoque</a>
                                 <a class="nav-link" href="../../login/sair.php"> <img src="../../img/sair.png" class="navbar-toggler-icon" alt="Logo">Sair</a>
                             </li>
@@ -53,11 +54,11 @@ if (!isset($_SESSION['carrinho'])) {
                 </div>
 
             </nav>
-            <!-- Espaço inicial -->
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            </div>
 
-            <h2 style="text-align: center;color: white;">Registrar venda</h2>
+
+            <header>
+                <h2>Registrar pedido</h2>
+            </header>
             <div class="div col-md3" style="text-align: center;">
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal3">
                     <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
@@ -215,7 +216,7 @@ if (!isset($_SESSION['carrinho'])) {
                             <select class="form-select" name="tamanho_acai" aria-label="Selecionar Tamanho">
 
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor = 0 and tamanho > 299");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor = 0 and i.id_itens = 1");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
@@ -370,7 +371,7 @@ if (!isset($_SESSION['carrinho'])) {
                                 $sth = $pdo->prepare("SELECT * FROM brigadeiro WHERE statusbrigadeiro = 0");
                                 $sth->execute();
                                 $sabores = $sth->fetchAll(); // Pega todos os resultados de uma vez
-                                $quantidadeDeGrupos = 4; // Definir quantos grupos você quer
+                                $quantidadeDeGrupos = 4;
 
                                 for ($i = 1; $i <= $quantidadeDeGrupos; $i++) {
                                     echo "<span>Sabor $i:</span><br>";
@@ -443,6 +444,7 @@ if (!isset($_SESSION['carrinho'])) {
 </body>
 
 <script src="../../js/script.js"></script>
+<script src="../../js/venda.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

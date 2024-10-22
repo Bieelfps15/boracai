@@ -5,7 +5,7 @@ $pdo = new PDO("mysql:host=localhost;dbname=boracai", "root", "");
 $sql = "SELECT t.tamanho AS Tamanho, COUNT(*) AS Quantidade
         FROM pedido p
         JOIN produto t ON p.nomeproduto LIKE CONCAT('%', t.tamanho, '%')
-        WHERE t.tamanho <> '' and t.tamanho >299
+        WHERE t.tamanho <> '' and p.nomeproduto LIKE 'acai%'
         GROUP BY t.tamanho;";
 
 $sth = $pdo->prepare($sql);

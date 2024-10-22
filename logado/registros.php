@@ -23,8 +23,9 @@ include 'tabela/tabela.php';
     <link rel="icon" type="imagem/png" href="../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../css/css.css">
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/itens.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Vendas realizadas</title>
+    <title>Histórico de pedidos</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 
@@ -39,11 +40,11 @@ include 'tabela/tabela.php';
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="geral.php"><img src="../img/grafico.png" class="navbar-toggler-icon" alt="Logo"> Dashbord</a>
-                    <a class="nav-link" href="venda/venda.php"><img src="../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Venda</a>
-                    <a class="nav-link active" href="registros.php"><img src="../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Registros</a>
-                    <a class="nav-link" href="itens.php"><img src="../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Itens</a>
+                    <a class="nav-link" href="venda/venda.php"><img src="../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Registrar pedido</a>
+                    <a class="nav-link active" href="registros.php"><img src="../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Histórico de pedidos</a>
+                    <a class="nav-link" href="itens.php"><img src="../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Produtos</a>
                     <a class="nav-link" href="controle.php"><img src="../img/controle.png" class="navbar-toggler-icon" alt="Logo"> Controle de estoque</a>
-                    <a class="nav-link" href="../login/sair.php"> <img src="../img/sair.png" class="navbar-toggler-icon" alt="Logo">Sair</a>
+                    <a class="nav-link" href="../login/sair.php"> <img src="../img/sair.png" class="navbar-toggler-icon" alt="Logo"> Sair</a>
                 </div>
             </div>
         </div>
@@ -51,12 +52,12 @@ include 'tabela/tabela.php';
 
     <div class="container-fluid">
 
-        <!-- Espaço inicial -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        </div>
 
         <div class="row">
-            <h2 style="text-align: center;color: white;">Registros de pedidos</h2>
+
+            <header>
+                <h2 style="text-align: center;color: white;">Histórico de Pedidos Realizados</h2>
+            </header>
             <div class="table-responsive">
                 <table id="recordsTable" class="table table-striped table-bordered">
                     <thead class="thead-dark" style="background-color: #343a40; color: white;">

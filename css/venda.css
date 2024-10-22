@@ -1,0 +1,10 @@
+.modal-header{
+    background-color: #343a40;
+    color: white;
+}
+
+header{
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}

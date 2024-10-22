@@ -107,45 +107,7 @@
             }
         }
 
-
-//venda.php
-        var modal1 = document.getElementById('modal1');
-    var inputModal1 = document.getElementById('inputModal1');
-
-    modal1.addEventListener('shown.bs.modal', function() {
-        inputModal1.focus();
-    });
-    // Seleciona o modal do Açaí pelo ID
-    var acaiModal = document.getElementById('modal1');
-    // Adiciona um evento que será executado ao fechar o modal
-    acaiModal.addEventListener('hidden.bs.modal', function() {
-        // Limpar checkboxes ao fechar o modal
-        acaiModal.addEventListener('hidden.bs.modal', function() {
-            limparCheckboxes(acaiModal);
-        });
-
-        // Função para adicionar o item ao carrinho e limpar os checkboxes
-        function adicionarAoCarrinho() {
-            // Lógica para adicionar o item ao carrinho (aqui você implementa a adição)
-            console.log("Item adicionado ao carrinho!");
-
-            // Limpa os checkboxes após adicionar ao carrinho
-            limparCheckboxes(acaiModal);
-        }
-
-        // Função para desmarcar os checkboxes no modal do Açaí
-        function limparCheckboxes(modal) {
-            var checkboxes = modal.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = false;
-            });
-        }
-        // Desmarca todos os checkboxes dentro do modal
-        var checkboxes = acaiModal.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = false;
-        });
-    });
+     
 
 
 

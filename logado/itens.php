@@ -20,7 +20,8 @@ include '../conexao.php';
     <link rel="icon" type="imagem/png" href="../img/boraçai.png" />
     <link rel="stylesheet" type="text/css" href="../css/css.css">
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
-    <title>Itens registrados</title>
+    <link rel="stylesheet" href="../css/venda.css">
+    <title>Produtos registrados</title>
 </head>
 
 <body>
@@ -35,25 +36,22 @@ include '../conexao.php';
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="geral.php"><img src="../img/grafico.png" class="navbar-toggler-icon" alt="Logo"> Dashbord</a>
-                    <a class="nav-link" href="venda/venda.php"><img src="../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Venda</a>
-                    <a class="nav-link" href="registros.php"><img src="../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Registros</a>
-                    <a class="nav-link active" href="itens.php"><img src="../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Itens</a>
+                    <a class="nav-link" href="venda/venda.php"><img src="../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Registrar pedido</a>
+                    <a class="nav-link" href="registros.php"><img src="../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Histórico de pedidos</a>
+                    <a class="nav-link active" href="itens.php"><img src="../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Produtos</a>
                     <a class="nav-link" href="controle.php"><img src="../img/controle.png" class="navbar-toggler-icon" alt="Logo"> Controle de estoque</a>
-                    <a class="nav-link" href="../login/sair.php"> <img src="../img/sair.png" class="navbar-toggler-icon" alt="Logo">Sair</a>
+                    <a class="nav-link" href="../login/sair.php"> <img src="../img/sair.png" class="navbar-toggler-icon" alt="Logo"> Sair</a>
                 </div>
             </div>
         </div>
     </nav>
     <div class="container-fluid">
 
-
-
-        <!-- Espaço inicial -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        </div>
         <div class="row">
-            <h2 style="text-align: center;color: white;">Todos os produtos registrados</h2>
 
+            <header>
+                <h2>Todos os produtos registrados</h2>
+            </header>
 
             <!-- Definição das abas -->
             <ul class="nav nav-tabs custom-tabs" id="myTab" role="tablist">
@@ -823,7 +821,7 @@ include '../conexao.php';
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-    
+
 
 </body>
 
