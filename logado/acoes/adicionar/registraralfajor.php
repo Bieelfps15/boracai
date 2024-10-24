@@ -1,33 +1,38 @@
 <?php
+    include '../../../conexao.php'; 
 
-include '../../../conexao.php';
+    $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-$nome = 4;
-$valorConvertido = str_replace(',', '.', str_replace('.', '', $post['valor']));
-$status = 0;
-$sabor = 0;
-$tamanho = 0;
+    $sabor = $_POST['sabores'];
+    $novo_sabor = $_POST['novo_sabor'];
+    $status = 0;
 
-$Dados = array(
-    'nome_produto' => $nome,
-    'sabor' => $sabor,
-    'sabor2' => $post['sabores'],
-    'tamanho' => $tamanho,
-    'valor' => $valorConvertido,
-    'status' => $status 
-);
+    if ($sabor === 'outrosabor' && !empty($novo_sabor)) {
+        $sabor = $novo_sabor;
+        $status = 0;
+        $sth = $pdo->prepare("INSERT INTO saborgeral (nome_sabor, statusgeral) VALUES (:nome_sabor, :statusgeral)");
+        $sth->bindParam(':nome_sabor', $sabor);
+        $sth->bindParam(':statusgeral', $status);
+        $sth->execute();
 
-$Fields = implode(', ', array_keys($Dados));
-$Places = ':' . implode(', :', array_keys($Dados));
-$Tabela = 'produto';
-$Create = "INSERT INTO {$Tabela} ({$Fields}) VALUES ({$Places})";
+        $sabor_id = $pdo->lastInsertId();
+    } else {
+        $sabor_id = $sabor;
+    }
 
-$sth = $pdo->prepare($Create);
-$sth->execute($Dados);
-echo $pdo->lastInsertId();
+    $tamanho = 0;
+    $nome = 4;
+    $valorConvertido = str_replace(',', '.', str_replace('.', '', $post['valor']));
+    $sabor = 0;
 
-header("LOCATION: ../../itens.php");
+    $sth = $pdo->prepare("INSERT INTO produto (nome_produto, sabor, sabor2, tamanho, valor, status) VALUES (:nome_produto, :sabor, :sabor2, :tamanho, :valor, :status)");
+    $sth->bindParam(':nome_produto', $nome);
+    $sth->bindParam(':sabor', $sabor);
+    $sth->bindParam(':sabor2', $sabor_id);
+    $sth->bindParam(':tamanho', $tamanho);
+    $sth->bindParam(':valor', $valorConvertido);
+    $sth->bindParam(':status', $status);
+    $sth->execute();
 
-
+    header("Location: ../../itens.php?&aba=menu5");
 ?>

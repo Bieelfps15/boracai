@@ -23,7 +23,7 @@ $sth = $pdo->prepare($Create);
 $sth->execute($Dados);
 echo $pdo->lastInsertId();
 
-header("LOCATION: ../../itens.php");
+header("Location: ../../itens.php?&aba=menu2");
 
 
 ?>

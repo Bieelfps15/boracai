@@ -793,8 +793,8 @@ include '../conexao.php';
                             <div class="modal-body">
                                 <span>Sabor da torta:</span>
                                 <form method="POST" action="acoes/adicionar/registrartorta.php">
-                                    <select required class='form-select' name="sabores">
-                                        <option value='' disabled selected>Escolha um sabor</option>
+                                    <select required class='form-select' id="sabores" name="sabores">
+                                    <option value='' disabled selected>Escolha um sabor</option>
                                         <?php
                                         $sth = $pdo->prepare("SELECT * FROM saborgeral where statusgeral = 0");
                                         $sth->execute();
@@ -804,7 +804,11 @@ include '../conexao.php';
                                         <?php
                                         }
                                         ?>
+                                        <option value="outrosabor">Outro (Adicionar novo)</option>
                                     </select>
+                                    <div id="novosabortorta" class="mt-3" style="display:none;">
+                                        <input type="text" class="form-control" name="novo_sabor" placeholder="Digite o novo sabor">
+                                    </div>
                                     <span>Preço:</span>
                                     <input type="text" class="form-control" name="valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço da torta">
                             </div>
@@ -829,8 +833,8 @@ include '../conexao.php';
                             <div class="modal-body">
                                 <span>Sabor do alfajor:</span>
                                 <form method="POST" action="acoes/adicionar/registraralfajor.php">
-                                    <select required class='form-select' name="sabores">
-                                        <option value='' disabled selected>Escolha um sabor</option>
+                                <select required class='form-select' id="sabores1" name="sabores">
+                                    <option value='' disabled selected>Escolha um sabor</option>
                                         <?php
                                         $sth = $pdo->prepare("SELECT * FROM saborgeral where statusgeral = 0");
                                         $sth->execute();
@@ -840,9 +844,13 @@ include '../conexao.php';
                                         <?php
                                         }
                                         ?>
+                                        <option value="outrosabor">Outro (Adicionar novo)</option>
                                     </select>
+                                    <div id="novosaboralfajor" class="mt-3" style="display:none;">
+                                        <input type="text" class="form-control" name="novo_sabor" placeholder="Digite o novo sabor">
+                                    </div>
                                     <span>Preço:</span>
-                                    <input type="text" class="form-control" name="valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço da torta">
+                                    <input type="text" class="form-control" name="valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço do alfajor">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
@@ -966,7 +974,6 @@ include '../conexao.php';
             </div>
         </div>
     </div>
-
 
     <script src="../js/script.js"></script>
     <script src="../js/itens.js"></script>

@@ -37,5 +37,5 @@
     $sth->bindParam(':status', $status);
     $sth->execute();
 
-    header("Location: ../../itens.php?msg=Produto adicionado com sucesso!");
+    header("Location: ../../itens.php?&aba=menu8");
 ?>
