@@ -85,13 +85,18 @@ include '../conexao.php';
                         <i class="fas fa-list"></i> Sabores em geral
                     </button>
                 </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="menu8-tab" data-bs-toggle="tab" data-bs-target="#menu8" type="button" role="tab" aria-controls="menu8" aria-selected="false">
+                        <i class="fas fa-box"></i> Outros produtos
+                    </button>
+                </li>
             </ul>
 
             <!-- Conteúdo das abas -->
             <div class="tab-content" id="myTabContent">
                 <!-- Aba de Bolos -->
                 <div id="menu1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="menu1-tab">
-                    <h3 style="text-align: center;color: white;">BOLOS DE POTE</h3>
+                    <h3 style="text-align: center;color: white;padding: 1rem">BOLOS DE POTE</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal1" style="float: right;">Adicionar bolo</button>
 
                     <!-- Campo de busca para Bolos -->
@@ -172,7 +177,7 @@ include '../conexao.php';
 
                 <!-- Aba de Açaí -->
                 <div id="menu2" class="tab-pane fade" role="tabpanel" aria-labelledby="menu2-tab">
-                    <h3 style="text-align: center;color: white;">AÇAÍ</h3>
+                    <h3 style="text-align: center;color: white;padding: 1rem">AÇAÍ</h3>
                     <div class="col-lg-12">
                         <table id="tabelaAcai" class="table table-striped table-bordered">
                             <thead class="thead-dark">
@@ -184,7 +189,7 @@ include '../conexao.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p  INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor = 0 and p.tamanho > 299;");
+                                $sth = $pdo->prepare("SELECT * FROM produto p  INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor = 0 and i.id_itens = 1;");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
@@ -226,7 +231,7 @@ include '../conexao.php';
                         </table>
                     </div>
 
-                    <h3 style="text-align: center;color: white;">ADICIONAIS</h3>
+                    <h3 style="text-align: center;color: white;padding: 1rem">ADICIONAIS</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal2" style="float: right;">Adicionar adicional</button>
                     <!-- Campo de busca para Adicionais -->
                     <input type="text" id="filterAdicionais" class="form-control filter-input" placeholder="Buscar nos Adicionais">
@@ -308,7 +313,7 @@ include '../conexao.php';
 
                 <!-- Aba de torta -->
                 <div id="menu4" class="tab-pane fade" role="tabpanel" aria-labelledby="menu4-tab">
-                    <h3 style="text-align: center;color: white;">TORTAS</h3>
+                    <h3 style="text-align: center;color: white;padding: 1rem">TORTAS</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal4" style="float: right;">Adicionar torta</button>
 
                     <!-- Campo de busca para torta -->
@@ -389,7 +394,7 @@ include '../conexao.php';
 
                 <!-- Aba de alfajor -->
                 <div id="menu5" class="tab-pane fade" role="tabpanel" aria-labelledby="menu5-tab">
-                    <h3 style="text-align: center;color: white;">ALFAJOR</h3>
+                    <h3 style="text-align: center;color: white;padding: 1rem">ALFAJOR</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal5" style="float: right;">Adicionar Alfajor</button>
 
                     <!-- Campo de busca para alfajor -->
@@ -472,7 +477,7 @@ include '../conexao.php';
 
                 <!-- Aba de brigadeiro -->
                 <div id="menu6" class="tab-pane fade" role="tabpanel" aria-labelledby="menu6-tab">
-                    <h3 style="text-align: center;color: white;">BRIGADEIRO</h3>
+                    <h3 style="text-align: center;color: white;padding: 1rem">BRIGADEIRO</h3>
                     <div class="col-lg-12">
                         <table id="tabelaBrigadeiro" class="table table-striped table-bordered">
                             <thead class="thead-dark">
@@ -526,7 +531,7 @@ include '../conexao.php';
                         </table>
                     </div>
 
-                    <h3 style="text-align: center;color: white;">SABORES PARA O BRIGADEIRO</h3>
+                    <h3 style="text-align: center;color: white;padding: 1rem">SABORES PARA O BRIGADEIRO</h3>
 
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal8" style="float: right;">Adicionar sabor do brigadeiro</button>
                     <!-- Campo de busca para brigadeiro -->
@@ -585,7 +590,7 @@ include '../conexao.php';
 
                 <!-- Aba de sabores -->
                 <div id="menu7" class="tab-pane fade" role="tabpanel" aria-labelledby="menu7-tab">
-                    <h3 style="text-align: center;color: white;">SABORES</h3>
+                    <h3 style="text-align: center;color: white;padding: 1rem">SABORES</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal7" style="float: right;">Adicionar Sabor</button>
 
                     <!-- Campo de busca para Sabores -->
@@ -637,6 +642,93 @@ include '../conexao.php';
                         </table>
                     </div>
                 </div>
+
+
+                <!-- Aba de outros produtos -->
+                <div id="menu8" class="tab-pane fade" role="tabpanel" aria-labelledby="menu8-tab">
+                    <h3 style="text-align: center;color: white;padding: 1rem">OUTROS PRODUTOS</h3>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal9" style="float: right;">Adicionar produto</button>
+
+                    <!-- Campo de busca para outros produtos -->
+                    <input type="text" id="filterOutros" class="form-control filter-input" placeholder="Buscar nos outros produtos">
+
+                    <div class="col-lg-12">
+                        <table id="tabelaAlfajor" class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th> Nome </th>
+                                    <th> Sabor </th>
+                                    <th> Tamanho </th>
+                                    <th> Valor </th>
+                                    <th> Edição </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $sth = $pdo->prepare("SELECT p.*, i.nome_itens AS nome_produto, s.nome_sabor AS sabor2 FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i ON i.id_itens = p.nome_produto WHERE p.status = 0 AND i.id_itens > 5");
+                                $sth->execute();
+                                foreach ($sth as $res) {
+                                    extract($res); ?>
+                                    <tr>
+                                        <td><?= $nome_produto ?></td>
+                                        <td><?= $sabor2 ?></td>
+                                        <td><?= $tamanho ?> g</td>
+                                        <td>R$ <?= $valor ?></td>
+                                        <td>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalprodutos<?= $id_produto ?>"><img src="../img/editar.png" class="navbar-toggler-icon" alt="Logo"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
+                                        </td>
+                                    </tr>
+                                    <!-- Modal para edição de outros produtos -->
+                                    <div class="modal fade" id="modalprodutos<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalprodutosLabel<?= $id_produto ?>" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalprodutosLabel<?= $id_produto ?>">Editar valor: <?= $nome_produto ?>, sabor: <?= $sabor2 ?>, tamanho: <?= $tamanho ?></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarproduto.php">
+                                                        <span>Preço atual: R$ <?= $valor ?> </span></br>
+                                                        <span>Novo preço:</span>
+                                                        <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
+                                                        <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo">
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal para confirmar a exclusão -->
+                                    <div class="modal fade" id="modalExcluir<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_produto ?>" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o produto "<?= $nome_produto ?>, sabor: <?= $sabor2 ?>, tamanho: <?= $tamanho ?>"?</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
 
 
 
@@ -805,6 +897,70 @@ include '../conexao.php';
                     </div>
                 </div>
 
+                <!-- Modal para Adicionar outros produtos -->
+                <div class="modal fade" id="modal9" tabindex="-1" aria-labelledby="modal9Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal9Label">Adicionar produto</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="POST" action="acoes/adicionar/registrarproduto.php">
+                                <div class="modal-body">
+                                    <span>Tipo do produto:</span>
+                                    <select class="form-select" id="tipoProduto" name="tipo_produto" required>
+                                        <option value='' disabled selected>Escolha um tipo</option>
+                                        <?php
+                                        $sth = $pdo->prepare("SELECT * FROM itens where id_itens > 5");
+                                        $sth->execute();
+                                        foreach ($sth as $res) {
+                                            extract($res); ?>
+                                            <option value="<?= $id_geral ?>"><?= $nome_itens ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                        <option value="outro">Outro (Adicionar novo)</option>
+                                    </select>
+                                    <div id="novoTipoProduto" class="mt-3" style="display:none;">
+                                        <input type="text" class="form-control" name="novo_tipo_produto" placeholder="Digite o novo tipo de produto">
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <button type="button" class="btn btn-primary" id="btnAdicionarSabor">Adicionar Sabor</button>
+                                        <button type="button" class="btn btn-secondary" id="btnAdicionarTamanho">Adicionar Tamanho</button>
+                                    </div>
+
+                                    <div id="saborInput" class="mt-3" style="display:none;">
+                                        <select required class='form-select' name="sabor">
+                                            <option value='' disabled selected>Escolha um sabor</option>
+                                            <?php
+                                            $sth = $pdo->prepare("SELECT * FROM saborgeral where statusgeral = 0");
+                                            $sth->execute();
+                                            foreach ($sth as $res) {
+                                                extract($res); ?>
+                                                <option value="<?= $id_geral ?>"><?= $nome_sabor ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <div id="tamanhoInput" class="mt-3" style="display:none;">
+                                        <p>Tamanho em gramas(sem vírgulas ou pontos)</p>
+                                        <input type="text" class="form-control" name="tamanho" placeholder="Digite o tamanho">
+                                    </div>
+                                    <span>Preço:</span>
+                                    <input type="text" class="form-control" name="valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço do produto">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                    <button type="submit" class="btn btn-success" name="action">Adicionar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
 
 
             </div>
@@ -813,6 +969,7 @@ include '../conexao.php';
 
 
     <script src="../js/script.js"></script>
+    <script src="../js/itens.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

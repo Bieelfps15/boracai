@@ -97,7 +97,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
         } else {
             echo "Erro: Formato de tamanho não reconhecido.";
         }
+    }elseif ($_POST['acao'] == 'adicionar_produto') {
+        $produtos = json_decode($_POST['produtos'], true);
+
+    if ($produtos) {
+        $_SESSION['carrinho'][] = [
+            'tipo' =>'produto',
+            'nome' => $produtos['nome_produto'],
+            'sabor' => $produtos['sabor2'],
+            'tamanho' => $produtos['tamanho'],
+            'valor' => floatval($produtos['valor'])
+        ];
     }
+}
 }
 header("Location: venda.php");
 exit();
+
+?>

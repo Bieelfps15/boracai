@@ -106,7 +106,7 @@ if (!isset($_SESSION['carrinho'])) {
                                                     <img src="../../img/bolo.png" alt="Logo" style="width: 40px;">
                                                 </div>
                                                 <div class="media-body text-right">
-                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar Bolo de pote</h3>
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar bolo de pote</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,7 +126,7 @@ if (!isset($_SESSION['carrinho'])) {
                                                     <img src="../../img/torta.png" alt="Logo" style="width: 40px;">
                                                 </div>
                                                 <div class="media-body text-right">
-                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar Torta</h3>
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar torta</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +146,7 @@ if (!isset($_SESSION['carrinho'])) {
                                                     <img src="../../img/alfajor.png" alt="Logo" style="width: 40px;">
                                                 </div>
                                                 <div class="media-body text-right">
-                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar Alfajor</h3>
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar alfajor</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -166,7 +166,7 @@ if (!isset($_SESSION['carrinho'])) {
                                                     <img src="../../img/brigadeiro.png" alt="Logo" style="width: 40px;">
                                                 </div>
                                                 <div class="media-body text-right">
-                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar Brigadeiro</h3>
+                                                    <h3 class="fs-2 fs-sm-5 fs-md-6">Adicionar brigadeiro</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -208,7 +208,7 @@ if (!isset($_SESSION['carrinho'])) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modal1Label">Selecione o Açaí</h5>
+                            <h5 class="modal-title" id="modal1Label">Selecione o açaí</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -257,7 +257,7 @@ if (!isset($_SESSION['carrinho'])) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modal2Label">Selecione o Bolo</h5>
+                            <h5 class="modal-title" id="modal2Label">Selecione o bolo</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -405,7 +405,45 @@ if (!isset($_SESSION['carrinho'])) {
             </div>
 
 
+            <!-- Modal 7 (produtos) -->
+            <div class="modal fade" id="modal7" tabindex="-1" aria-labelledby="modal7Label" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal7Label">Selecione o produto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span style="font-weight: bolder;">Produtos:</span>
+                            <select class="form-select" name="produtos" aria-label="Selecionar o produto">
+                                <?php
+                                $sth = $pdo->prepare("SELECT p.*, i.nome_itens AS nome_produto, s.nome_sabor AS sabor2 FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i ON i.id_itens = p.nome_produto WHERE p.status = 0 AND i.id_itens > 5");
+                                $sth->execute();
+                                foreach ($sth as $res) {
+                                    extract($res);
 
+                                    $produto_json = json_encode([
+                                        'nome_produto' => $nome_produto,
+                                        'sabor2' => $sabor2,
+                                        'tamanho' => $tamanho,
+                                        'valor' => $valor
+                                    ]);
+                                ?>
+                                    <option value='<?= htmlspecialchars($produto_json, ENT_QUOTES, 'UTF-8') ?>'>
+                                        <?= $nome_produto ?>, <?= $sabor2 ?>, <?= $tamanho ?>g - R$ <?= $valor ?>
+                                    </option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-success" name="acao" value="adicionar_produto">Adicionar ao pedido</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 

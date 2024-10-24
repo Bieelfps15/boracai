@@ -2,24 +2,23 @@
 session_start();
 
 include '../conexao.php';
+
 $nome = filter_input(INPUT_POST, 'nome', FILTER_DEFAULT);
 $senha = filter_input(INPUT_POST, 'senha', FILTER_DEFAULT);
 
-$sth = $pdo->prepare('SELECT * FROM pessoa WHERE nome_pessoa = :nome AND senha_pessoa = :senha');
+$sth = $pdo->prepare('SELECT * FROM pessoa WHERE nome_pessoa = :nome');
 $sth->bindValue(':nome', $nome);
-$sth->bindValue(':senha', $senha);
 $sth->execute();
-if ($sth->rowCount() > 0) {
-    $resultado = $sth->fetch(PDO::FETCH_ASSOC);
-    extract($resultado);
 
-    // Armazenar nome e ID da pessoa na sessão
-    $_SESSION['boracai']['nome'] = $nome;
-    $_SESSION['boracai']['id_pessoa'] = $id_pessoa;
+$resultado = $sth->fetch(PDO::FETCH_ASSOC);
+
+if ($resultado && password_verify($senha, $resultado['senha_pessoa'])) {
+    $_SESSION['boracai']['nome'] = $resultado['nome_pessoa'];
+    $_SESSION['boracai']['id_pessoa'] = $resultado['id_pessoa'];
 
     header('LOCATION: ../logado/geral.php');
 } else {
-    echo ("<script>alert('Email ou senha incorreta'); 
+    echo ("<script>alert('Nome ou senha incorretos'); 
     location.href='../index.php';</script>");
 }
 ?>

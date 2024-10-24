@@ -16,33 +16,28 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
         $total_pedido += $item_total; // Soma ao total do pedido
 
         echo "<tr>";
-
-        if ($item['tipo'] == 'açaí') {
-            echo "<td>{$item['tipo']}</td>";
-            echo "<td>{$item['tamanho']}</td>";
-            echo "<td>" . (count($item['adicionais']) > 0 ? implode(", ", $item['adicionais']) : "Nenhum") . "</td>";
-            echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
-        } elseif ($item['tipo'] == 'bolo') {
-            echo "<td>{$item['tipo']}</td>";
-            echo "<td>{$item['sabor']}</td>";
-            echo "<td>N/A</td>";
-            echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
-        } elseif ($item['tipo'] == 'torta') {
-            echo "<td>{$item['tipo']}</td>";
-            echo "<td>{$item['sabor']}</td>";
-            echo "<td>N/A</td>";
-            echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
-        } elseif ($item['tipo'] == 'alfajor') {
-            echo "<td>{$item['tipo']}</td>";
-            echo "<td>{$item['sabor']}</td>";
-            echo "<td>N/A</td>";
-            echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
-        } elseif ($item['tipo'] == 'brigadeiro') {
-            echo "<td>{$item['nome']}</td>";
-            echo "<td>{$item['tamanho']}</td>";
-            echo "<td>{$item['sabores']}</td>";
-            echo "<td>R$ " . number_format($item_total, 2, ',', '.') . "</td>";
-        }
+        if (isset($item['tipo'])) {
+            if ($item['tipo'] == 'açaí') {
+                echo "<td>{$item['tipo']}</td>";
+                echo "<td>{$item['tamanho']}</td>";
+                echo "<td>" . (isset($item['adicionais']) && count($item['adicionais']) > 0 ? implode(", ", $item['adicionais']) : "Nenhum") . "</td>";
+                echo "<td>R$ " . number_format($item['valor'], 2, ',', '.') . "</td>";
+            } elseif ($item['tipo'] == 'bolo' || $item['tipo'] == 'torta' || $item['tipo'] == 'alfajor') {
+                echo "<td>{$item['tipo']}</td>";
+                echo "<td>" . (isset($item['sabor']) ? $item['sabor'] : 'N/A') . "</td>";
+                echo "<td>N/A</td>";
+                echo "<td>R$ " . number_format($item['valor'], 2, ',', '.') . "</td>";
+            } elseif ($item['tipo'] == 'brigadeiro') {
+                echo "<td>" . (isset($item['nome']) ? $item['nome'] : 'N/A') . "</td>";
+                echo "<td>" . (isset($item['tamanho']) ? $item['tamanho'] : 'N/A') . "</td>";
+                echo "<td>" . (isset($item['sabores']) ? implode(", ", $item['sabores']) : 'Nenhum') . "</td>";
+                echo "<td>R$ " . number_format($item['valor'], 2, ',', '.') . "</td>";
+            } elseif ($item['tipo'] == 'produto') {
+                echo "<td>" . (isset($item['nome']) ? $item['nome'] : 'N/A') . "</td>";
+                echo "<td>" . (isset($item['sabor']) ? $item['sabor'] : 'N/A') . "</td>";
+                echo "<td>" . (isset($item['tamanho']) ? $item['tamanho'] . 'g' : 'N/A') . "</td>";
+                echo "<td>R$ " . number_format($item['valor'], 2, ',', '.') . "</td>";
+            }
 
         echo "<td>
             <form method='POST' action='remover_item.php' style='display:inline;'>
@@ -53,6 +48,7 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
 
         echo "</tr>";
     }
+}
     echo "</tbody>";
     echo "</table>";
     echo "</div>";

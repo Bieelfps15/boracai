@@ -87,6 +87,11 @@ foreach ($_SESSION['carrinho'] as $item) {
         $nome_produto_base = $item['nome'];
         $tamanho = $item['tamanho'];
         $nome_produto = $nome_produto_base . " (" . $tamanho . " un.)";
+    } elseif ($item['tipo'] == 'produto') {
+        $nome_produto_base = $item['nome']; 
+        $sabor = isset($item['sabor']) ? $item['sabor'] : 'N/A'; 
+        $tamanho = isset($item['tamanho']) ? $item['tamanho'] . 'g' : 'N/A';
+        $nome_produto = $nome_produto_base . " de " . $sabor . " - " . $tamanho;
     }
 
     // Captura os adicionais
