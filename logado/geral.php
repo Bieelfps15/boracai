@@ -32,16 +32,15 @@ include 'dashbord/dados.php';
     <div class="container-fluid">
       <a class="navbar-brand"> <img src="../img/boraçai.png" class="boracai" alt="Logo"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="../img/menu.png" class="navbar-toggler-icon" alt="Logo">
+        <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" href="geral.php"><img src="../img/grafico.png" class="navbar-toggler-icon" alt="Logo"> Dashbord</a>
-          <a class="nav-link" href="venda/venda.php"><img src="../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Registrar pedido</a>
-          <a class="nav-link" href="registros.php"><img src="../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Histórico de pedidos</a>
-          <a class="nav-link" href="itens.php"><img src="../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Produtos</a>
-          <a class="nav-link" href="controle.php"><img src="../img/controle.png" class="navbar-toggler-icon" alt="Logo"> Controle de estoque</a>
-          <a class="nav-link" href="../login/sair.php"> <img src="../img/sair.png" class="navbar-toggler-icon" alt="Logo">Sair</a>
+          <a class="nav-link active" href="geral.php"><i class="fas fa-chart-line"></i> Dashbord</a>
+          <a class="nav-link" href="venda/venda.php"><i class="fas fa-shopping-cart"></i> Registrar pedido</a>
+          <a class="nav-link" href="registros.php"><i class="fas fa-history"></i> Histórico de pedidos</a>
+          <a class="nav-link" href="itens.php"><i class="fas fa-box"></i> Produtos</a>
+          <a class="nav-link" href="../login/sair.php"><i class="fas fa-sign-out-alt"></i> Sair</a>
         </div>
       </div>
     </div>
@@ -256,6 +255,14 @@ include 'dashbord/dados.php';
         </div>
       </div>
 
+      <div class="container-fluid">
+        <div class="row" id="chartsContainer">
+        </div>
+      </div>
+
+
+
+
     </div>
   </div>
 
@@ -263,6 +270,125 @@ include 'dashbord/dados.php';
 
 
 </body>
+
+<script>
+  function fetchItens() {
+    fetch('dashbord/selecionaritens.php')
+      .then(response => response.json())
+      .then(itens => {
+        console.log("Itens retornados:", itens);
+        itens.forEach(item => {
+          createBarChartForItem(item.nome);
+        });
+      })
+      .catch(error => console.error("Erro ao buscar itens:", error));
+  }
+
+  function createBarChartForItem(nomeItem) {
+    fetch('dashbord/buscavendaitens.php?nome=' + encodeURIComponent(nomeItem))
+      .then(response => response.json())
+      .then(data => {
+        console.log("Dados para o item", nomeItem, data);
+
+        const chartId = `chart-${nomeItem.replace(/\s+/g, '-')}`;
+        const chartContainer = document.createElement('div');
+        chartContainer.classList.add('col-xl-4', 'col-lg-12', 'mb-4');
+        chartContainer.innerHTML = `
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary fas fa-chart-pie"> ${nomeItem} mais vendidos</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="${chartId}" style="height: 600px; width: 70%;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+        document.getElementById('chartsContainer').appendChild(chartContainer);
+
+        var ctx = document.getElementById(chartId).getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: data.labels, // Rótulos dos produtos vendidos
+            datasets: [{
+              label: "Quantidade",
+              backgroundColor: "#4e73df",
+              borderColor: "#4e73df",
+              data: data.values, // Quantidades de vendas para cada rótulo
+            }],
+          },
+          options: {
+            maintainAspectRatio: false,
+            layout: {
+              padding: {
+                left: 10,
+                right: 25,
+                top: 25,
+                bottom: 0
+              }
+            },
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                ticks: {
+                  maxTicksLimit: 6
+                },
+                maxBarThickness: 25,
+              }],
+              yAxes: [{
+                ticks: {
+                  min: 0,
+                  max: Math.max(...data.values) + 2, // Ajusta o máximo com base nos valores
+                  padding: 10,
+                  callback: function(value) {
+                    return '' + value;
+                  }
+                },
+                gridLines: {
+                  color: "rgb(234, 236, 244)",
+                  zeroLineColor: "rgb(234, 236, 244)",
+                  drawBorder: false,
+                  borderDash: [2],
+                  zeroLineBorderDash: [2]
+                }
+              }],
+            },
+            legend: {
+              display: false
+            },
+            tooltips: {
+              titleMarginBottom: 10,
+              titleFontColor: '#6e707e',
+              titleFontSize: 14,
+              backgroundColor: "rgb(255,255,255)",
+              bodyFontColor: "#858796",
+              borderColor: '#dddfeb',
+              borderWidth: 1,
+              xPadding: 15,
+              yPadding: 15,
+              displayColors: false,
+              caretPadding: 10,
+              callbacks: {
+                label: function(tooltipItem, chart) {
+                  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                  return datasetLabel + ': ' + tooltipItem.yLabel;
+                }
+              }
+            },
+          }
+        });
+      })
+      .catch(error => console.error("Erro ao buscar dados para o item", nomeItem, error));
+  }
+
+  // Chama a função para buscar e gerar gráficos ao carregar a página
+  fetchItens();
+</script>
 <script>
   // Gráfico de Área
   var ctx = document.getElementById("myAreaChart").getContext('2d');

@@ -37,17 +37,16 @@ if (!isset($_SESSION['carrinho'])) {
                 <div class="container-fluid">
                     <a class="navbar-brand"> <img src="../../img/boraçai.png" class="boracai" alt="Logo"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <img src="../../img/menu.png" class="navbar-toggler-icon" alt="Logo">
+                        <i class="fas fa-bars"></i>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="navbar-nav">
-                                <a class="nav-link" href="../geral.php"><img src="../../img/grafico.png" class="navbar-toggler-icon" alt="Logo"> Dashbord</a>
-                                <a class="nav-link active" href="venda.php"><img src="../../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Registrar pedido</a>
-                                <a class="nav-link" href="../registros.php"><img src="../../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Histórico de pedidos</a>
-                                <a class="nav-link" href="../itens.php"><img src="../../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Produtos</a>
-                                <a class="nav-link" href="../controle.php"><img src="../../img/controle.png" class="navbar-toggler-icon" alt="Logo"> Controle de estoque</a>
-                                <a class="nav-link" href="../../login/sair.php"> <img src="../../img/sair.png" class="navbar-toggler-icon" alt="Logo">Sair</a>
+                                <a class="nav-link" href="../geral.php"><i class="fas fa-chart-line"></i> Dashbord</a>
+                                <a class="nav-link active" href="venda.php"><i class="fas fa-shopping-cart"></i> Registrar pedido</a>
+                                <a class="nav-link" href="../registros.php"><i class="fas fa-history"></i> Histórico de pedidos</a>
+                                <a class="nav-link" href="../itens.php"><i class="fas fa-box"></i> Produtos</a>
+                                <a class="nav-link" href="../../login/sair.php"><i class="fas fa-sign-out-alt"></i> Sair</a>
                             </li>
                         </ul>
                     </div>

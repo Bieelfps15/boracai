@@ -31,16 +31,15 @@ include '../conexao.php';
         <div class="container-fluid">
             <a class="navbar-brand"> <img src="../img/boraçai.png" class="boracai" alt="Logo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <img src="../img/menu.png" class="navbar-toggler-icon" alt="Logo">
+                <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="geral.php"><img src="../img/grafico.png" class="navbar-toggler-icon" alt="Logo"> Dashbord</a>
-                    <a class="nav-link" href="venda/venda.php"><img src="../img/venda.png" class="navbar-toggler-icon" alt="Logo"> Registrar pedido</a>
-                    <a class="nav-link" href="registros.php"><img src="../img/registros.png" class="navbar-toggler-icon" alt="Logo"> Histórico de pedidos</a>
-                    <a class="nav-link active" href="itens.php"><img src="../img/itens.png" class="navbar-toggler-icon" alt="Logo"> Produtos</a>
-                    <a class="nav-link" href="controle.php"><img src="../img/controle.png" class="navbar-toggler-icon" alt="Logo"> Controle de estoque</a>
-                    <a class="nav-link" href="../login/sair.php"> <img src="../img/sair.png" class="navbar-toggler-icon" alt="Logo"> Sair</a>
+                    <a class="nav-link" href="geral.php"><i class="fas fa-chart-line"></i> Dashbord</a>
+                    <a class="nav-link" href="venda/venda.php"><i class="fas fa-shopping-cart"></i> Registrar pedido</a>
+                    <a class="nav-link" href="registros.php"><i class="fas fa-history"></i> Histórico de pedidos</a>
+                    <a class="nav-link active" href="itens.php"><i class="fas fa-box"></i> Produtos</a>
+                    <a class="nav-link" href="../login/sair.php"><i class="fas fa-sign-out-alt"></i> Sair</a>
                 </div>
             </div>
         </div>
@@ -121,8 +120,8 @@ include '../conexao.php';
                                         <td><?= $sabor_bolo ?></td>
                                         <td>R$ <?= $valor ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbolo<?= $id_produto ?>"><img src="../img/editar.png" class="navbar-toggler-icon" alt="Logo"></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbolo<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
                                         </td>
                                     </tr>
                                     <!-- Modal para edição do bolo -->
@@ -197,7 +196,7 @@ include '../conexao.php';
                                         <td><?= $tamanho ?> ml</td>
                                         <td>R$ <?= $valor ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalacai<?= $id_produto ?>"><img src="../img/editar.png" class="navbar-toggler-icon" alt="Deletar"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalacai<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
 
@@ -255,8 +254,8 @@ include '../conexao.php';
                                         <td><?= $nome_adicional ?></td>
                                         <td>R$ <?= $valor_adicional ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modaladicional<?= $id_adicional ?>"><img src="../img/editar.png" class="navbar-toggler-icon" alt="Logo"></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluirAdicional<?= $id_adicional ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Deletar"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modaladicional<?= $id_adicional ?>"><i class="fas fa-edit"></i></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluirAdicional<?= $id_adicional ?>"><i class="fas fa-trash" style="color: red;"></i></a>
                                         </td>
                                     </tr>
 
@@ -338,8 +337,8 @@ include '../conexao.php';
                                         <td><?= $nome_sabor ?></td>
                                         <td>R$ <?= $valor ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modaltorta<?= $id_produto ?>"><img src="../img/editar.png" class="navbar-toggler-icon" alt="Logo"></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modaltorta<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
                                         </td>
                                     </tr>
                                     <!-- Modal para edição da torta -->
@@ -419,8 +418,8 @@ include '../conexao.php';
                                         <td><?= $nome_sabor ?></td>
                                         <td>R$ <?= $valor ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalalfajar<?= $id_produto ?>"><img src="../img/editar.png" class="navbar-toggler-icon" alt="Logo"></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalalfajar<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
                                         </td>
                                     </tr>
                                     <!-- Modal para edição do alfajor -->
@@ -497,7 +496,7 @@ include '../conexao.php';
                                         <td><?= $tamanho ?> unidade</td>
                                         <td>R$ <?= $valor ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro<?= $id_produto ?>"><img src="../img/editar.png" class="navbar-toggler-icon" alt="Deletar"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
 
@@ -553,7 +552,7 @@ include '../conexao.php';
                                     <tr>
                                         <td><?= $nome_brigadeiro ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro1<?= $id_brigadeiro ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Deletar"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro1<?= $id_brigadeiro ?>"><i class="fas fa-trash" style="color: red;"></i></a>
                                         </td>
                                     </tr>
                                     <!-- Modal para confirmar a exclusão -->
@@ -613,7 +612,7 @@ include '../conexao.php';
                                     <tr>
                                         <td><?= $nome_sabor ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluirsab<?= $id_geral ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluirsab<?= $id_geral ?>"><i class="fas fa-trash" style="color: red;"></i></a>
                                         </td>
                                     </tr>
 
@@ -675,8 +674,8 @@ include '../conexao.php';
                                         <td><?= $tamanho ?> g</td>
                                         <td>R$ <?= $valor ?></td>
                                         <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalprodutos<?= $id_produto ?>"><img src="../img/editar.png" class="navbar-toggler-icon" alt="Logo"></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><img src="../img/delatar.png" class="navbar-toggler-icon" alt="Logo"></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalprodutos<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
                                         </td>
                                     </tr>
                                     <!-- Modal para edição de outros produtos -->
@@ -794,7 +793,7 @@ include '../conexao.php';
                                 <span>Sabor da torta:</span>
                                 <form method="POST" action="acoes/adicionar/registrartorta.php">
                                     <select required class='form-select' id="sabores" name="sabores">
-                                    <option value='' disabled selected>Escolha um sabor</option>
+                                        <option value='' disabled selected>Escolha um sabor</option>
                                         <?php
                                         $sth = $pdo->prepare("SELECT * FROM saborgeral where statusgeral = 0");
                                         $sth->execute();
@@ -833,8 +832,8 @@ include '../conexao.php';
                             <div class="modal-body">
                                 <span>Sabor do alfajor:</span>
                                 <form method="POST" action="acoes/adicionar/registraralfajor.php">
-                                <select required class='form-select' id="sabores1" name="sabores">
-                                    <option value='' disabled selected>Escolha um sabor</option>
+                                    <select required class='form-select' id="sabores1" name="sabores">
+                                        <option value='' disabled selected>Escolha um sabor</option>
                                         <?php
                                         $sth = $pdo->prepare("SELECT * FROM saborgeral where statusgeral = 0");
                                         $sth->execute();
@@ -975,7 +974,7 @@ include '../conexao.php';
         </div>
     </div>
 
-    <script src="../js/script.js"></script>
+    <script src="../js/scripts.js"></script>
     <script src="../js/itens.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
