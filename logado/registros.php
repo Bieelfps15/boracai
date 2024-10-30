@@ -106,7 +106,7 @@ include 'tabela/tabela.php';
             "ordering": true,
             "language": {
                 "lengthMenu": "Mostrar _MENU_ registros por página",
-                "zeroRecords": "Nenhum registro encontrado",
+                "zeroRecords": "Nenhum registro encontrado.",
                 "info": "Mostrando página _PAGE_ de _PAGES_",
                 "infoEmpty": "Nenhum registro disponível",
                 "infoFiltered": "(filtrado de _MAX_ registros totais)",

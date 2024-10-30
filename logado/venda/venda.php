@@ -263,11 +263,11 @@ if (!isset($_SESSION['carrinho'])) {
                             <span style="font-weight: bolder;">Sabores:</span>
                             <select class="form-select" name="sabor_bolo" aria-label="Selecionar Sabor do Bolo">
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborbolo s ON s.id_bolo = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0 and status = 0");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0 and i.id_itens = 2 and statusgeral = 0");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
-                                    <option value="<?= $sabor_bolo ?> - R$ <?= $valor ?>"><?= $sabor_bolo ?> - R$ <?= $valor ?></option>
+                                    <option value="<?= $nome_sabor ?> - R$ <?= $valor ?>"><?= $nome_sabor ?> - R$ <?= $valor ?></option>
                                 <?php
                                 }
                                 ?>
@@ -293,7 +293,7 @@ if (!isset($_SESSION['carrinho'])) {
                             <span style="font-weight: bolder;">Sabores:</span>
                             <select class="form-select" name="torta" aria-label="Selecionar Sabor da Torta">
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 3 and statusgeral = 0");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0 and i.id_itens = 3 and statusgeral = 0");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
@@ -324,7 +324,7 @@ if (!isset($_SESSION['carrinho'])) {
                             <span style="font-weight: bolder;">Sabores:</span>
                             <select class="form-select" name="alfajor" aria-label="Selecionar Sabor da Torta">
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and i.id_itens = 4 and statusgeral = 0");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0 and i.id_itens = 4 and statusgeral = 0");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res); ?>
@@ -416,20 +416,20 @@ if (!isset($_SESSION['carrinho'])) {
                             <span style="font-weight: bolder;">Produtos:</span>
                             <select class="form-select" name="produtos" aria-label="Selecionar o produto">
                                 <?php
-                                $sth = $pdo->prepare("SELECT p.*, i.nome_itens AS nome_produto, s.nome_sabor AS sabor2 FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i ON i.id_itens = p.nome_produto WHERE p.status = 0 AND i.id_itens > 5");
+                                $sth = $pdo->prepare("SELECT p.*, i.nome_itens AS nome_produto, s.nome_sabor AS sabor FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor INNER JOIN itens i ON i.id_itens = p.nome_produto WHERE p.status = 0 AND i.id_itens > 5");
                                 $sth->execute();
                                 foreach ($sth as $res) {
                                     extract($res);
 
                                     $produto_json = json_encode([
                                         'nome_produto' => $nome_produto,
-                                        'sabor2' => $sabor2,
+                                        'sabor' => $sabor,
                                         'tamanho' => $tamanho,
                                         'valor' => $valor
                                     ]);
                                 ?>
                                     <option value='<?= htmlspecialchars($produto_json, ENT_QUOTES, 'UTF-8') ?>'>
-                                        <?= $nome_produto ?>, <?= $sabor2 ?>, <?= $tamanho ?>g - R$ <?= $valor ?>
+                                        <?= $nome_produto ?>, <?= $sabor ?>, <?= $tamanho ?>g - R$ <?= $valor ?>
                                     </option>
                                 <?php
                                 }
@@ -443,16 +443,6 @@ if (!isset($_SESSION['carrinho'])) {
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
             </form>
 
             <!-- Modal 3 -->

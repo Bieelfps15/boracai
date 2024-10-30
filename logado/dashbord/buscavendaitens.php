@@ -3,13 +3,8 @@ header('Content-Type: application/json');
 
 $conn = new mysqli("localhost", "root", "", "boracai");
 
-if ($conn->connect_error) {
-    die("Erro na conexão: " . $conn->connect_error);
-}
-
 $nome_itens = $_GET['nome'];
 
-// Buscar quantidade de vendas por nome de produto
 $sql = "SELECT nomeproduto, COUNT(*) as vendas FROM pedido WHERE nomeproduto LIKE CONCAT('%', ?, '%') GROUP BY nomeproduto";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $nome_itens);

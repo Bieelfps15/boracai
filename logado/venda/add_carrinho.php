@@ -2,32 +2,27 @@
 include '../../conexao.php';
 session_start(); 
 
-// Verifica se o usuário está logado
 if (!isset($_SESSION['boracai'])) {
     header("Location: ../../index.php");
     die;
 }
 
-// Inicializa um array para armazenar os itens do carrinho se não existir
 if (!isset($_SESSION['carrinho'])) {
     $_SESSION['carrinho'] = [];
 }
 
-// Verifica o método POST e a ação do formulário
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['acao'])) {
     if ($_POST['acao'] == 'adicionar_acai') {
-        // Obtem o tamanho e o valor do açaí
         $tamanho_acai = $_POST['tamanho_acai'];
         $valor_acai = floatval(explode(" - R$", $tamanho_acai)[1]);
         $adicionais = isset($_POST['adicionais']) ? $_POST['adicionais'] : [];
 
-        // Inicializa o valor total do açaí
         $valor_total_acai = $valor_acai;
 
-        // Calcula o valor total considerando os adicionais
         foreach ($adicionais as $adicional) {
             $valor_adicional = floatval(explode(" - R$", $adicional)[1]);
-            $valor_total_acai += $valor_adicional; // Soma o valor do adicional
+            $valor_total_acai += $valor_adicional; 
         }
 
         // Adiciona o açaí ao carrinho

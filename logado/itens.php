@@ -112,61 +112,67 @@ include '../conexao.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborbolo s ON s.id_bolo = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0 and status = 0;");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0 and status = 0 and i.id_itens = 2");
                                 $sth->execute();
-                                foreach ($sth as $res) {
-                                    extract($res); ?>
-                                    <tr>
-                                        <td><?= $sabor_bolo ?></td>
-                                        <td>R$ <?= $valor ?></td>
-                                        <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbolo<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
-                                        </td>
-                                    </tr>
-                                    <!-- Modal para edição do bolo -->
-                                    <div class="modal fade" id="modalbolo<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalboloLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalboloLabel<?= $id_produto ?>">Editar valor do bolo "<?= $sabor_bolo ?>"</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarbolo.php">
-                                                        <span>Preço atual: R$ <?= $valor ?> </span></br>
-                                                        <span>Novo preço:</span>
-                                                        <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
-                                                        <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do bolo">
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                $resultados = $sth->fetchAll();
 
-                                    <!-- Modal para confirmar a exclusão -->
-                                    <div class="modal fade" id="modalExcluir<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o bolo "<?= $sabor_bolo ?>"?</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
+                                if (count($resultados) > 0) {
+                                    foreach ($resultados as $res) {
+                                        extract($res); ?>
+                                        <tr>
+                                            <td><?= $nome_sabor ?></td>
+                                            <td>R$ <?= $valor ?></td>
+                                            <td>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbolo<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
+                                            </td>
+                                        </tr>
+                                        <!-- Modal para edição do bolo -->
+                                        <div class="modal fade" id="modalbolo<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalboloLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalboloLabel<?= $id_produto ?>">Editar valor do bolo "<?= $nome_sabor ?>"</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarbolo.php">
+                                                            <span>Preço atual: R$ <?= $valor ?> </span></br>
+                                                            <span>Novo preço:</span>
+                                                            <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
+                                                            <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do bolo">
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <!-- Modal para confirmar a exclusão -->
+                                        <div class="modal fade" id="modalExcluir<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o bolo "<?= $sabor_bolo ?>"?</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                 <?php
+                                    }
+                                } else {
+                                    echo '<tr><td colspan="3" style="text-align: center;">Nenhum bolo encontrado.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -188,42 +194,48 @@ include '../conexao.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p  INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor = 0 and i.id_itens = 1;");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN itens i on i.id_itens = p.nome_produto WHERE i.id_itens = 1;");
                                 $sth->execute();
-                                foreach ($sth as $res) {
-                                    extract($res); ?>
-                                    <tr>
-                                        <td><?= $tamanho ?> ml</td>
-                                        <td>R$ <?= $valor ?></td>
-                                        <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalacai<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
-                                        </td>
-                                    </tr>
+                                $resultados = $sth->fetchAll();
 
-                                    <!-- Modal para edição do açai -->
-                                    <div class="modal fade" id="modalacai<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalacaiLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalacaiLabel<?= $id_produto ?>">Editar valor do tamanho <?= $tamanho ?></h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editartamanho.php">
-                                                        <span>Preço atual: R$ <?= $valor ?> </span></br>
-                                                        <span>Novo preço:</span>
-                                                        <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
-                                                        <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do copo">
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                if (count($resultados) > 0) {
+                                    foreach ($resultados as $res) {
+                                        extract($res); ?>
+                                        <tr>
+                                            <td><?= $tamanho ?> ml</td>
+                                            <td>R$ <?= $valor ?></td>
+                                            <td>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalacai<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Modal para edição do açai -->
+                                        <div class="modal fade" id="modalacai<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalacaiLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalacaiLabel<?= $id_produto ?>">Editar valor do tamanho <?= $tamanho ?></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editartamanho.php">
+                                                            <span>Preço atual: R$ <?= $valor ?> </span></br>
+                                                            <span>Novo preço:</span>
+                                                            <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
+                                                            <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do copo">
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 <?php
+                                    }
+                                } else {
+                                    echo '<tr><td colspan="3" style="text-align: center;">Nenhum açaí encontrado.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -232,7 +244,6 @@ include '../conexao.php';
 
                     <h3 style="text-align: center;color: white;padding: 1rem">ADICIONAIS</h3>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal2" style="float: right;">Adicionar adicional</button>
-                    <!-- Campo de busca para Adicionais -->
                     <input type="text" id="filterAdicionais" class="form-control filter-input" placeholder="Buscar nos Adicionais">
 
                     <div class="col-lg-12">
@@ -248,60 +259,66 @@ include '../conexao.php';
                                 <?php
                                 $sth = $pdo->prepare("SELECT * FROM adicionais where status_adicional = 0;");
                                 $sth->execute();
-                                foreach ($sth as $res) {
-                                    extract($res); ?>
-                                    <tr>
-                                        <td><?= $nome_adicional ?></td>
-                                        <td>R$ <?= $valor_adicional ?></td>
-                                        <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modaladicional<?= $id_adicional ?>"><i class="fas fa-edit"></i></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluirAdicional<?= $id_adicional ?>"><i class="fas fa-trash" style="color: red;"></i></a>
-                                        </td>
-                                    </tr>
+                                $resultados = $sth->fetchAll();
 
-                                    <!-- Modal para edição do adicional -->
-                                    <div class="modal fade" id="modaladicional<?= $id_adicional ?>" tabindex="-1" aria-labelledby="modaladicionalLabel<?= $id_adicional ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modaladicionalLabel<?= $id_adicional ?>">Editar valor do adicional "<?= $nome_adicional ?>"</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="formEdit<?= $id_adicional ?>" method="POST" action="acoes/editar/editaradicional.php">
-                                                        <span>Preço atual: R$ <?= $valor_adicional ?> </span></br>
-                                                        <span>Novo preço:</span>
-                                                        <input type="hidden" name="id_adicional" value="<?= $id_adicional ?>">
-                                                        <input type="text" class="form-control" name="valor_adicional" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do adicional">
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_adicional ?>').submit();">Editar</button>
+                                if (count($resultados) > 0) {
+                                    foreach ($resultados as $res) {
+                                        extract($res); ?>
+                                        <tr>
+                                            <td><?= $nome_adicional ?></td>
+                                            <td>R$ <?= $valor_adicional ?></td>
+                                            <td>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modaladicional<?= $id_adicional ?>"><i class="fas fa-edit"></i></a>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluirAdicional<?= $id_adicional ?>"><i class="fas fa-trash" style="color: red;"></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Modal para edição do adicional -->
+                                        <div class="modal fade" id="modaladicional<?= $id_adicional ?>" tabindex="-1" aria-labelledby="modaladicionalLabel<?= $id_adicional ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modaladicionalLabel<?= $id_adicional ?>">Editar valor do adicional "<?= $nome_adicional ?>"</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="formEdit<?= $id_adicional ?>" method="POST" action="acoes/editar/editaradicional.php">
+                                                            <span>Preço atual: R$ <?= $valor_adicional ?> </span></br>
+                                                            <span>Novo preço:</span>
+                                                            <input type="hidden" name="id_adicional" value="<?= $id_adicional ?>">
+                                                            <input type="text" class="form-control" name="valor_adicional" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do adicional">
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_adicional ?>').submit();">Editar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <!-- Modal para confirmar a exclusão do adicional -->
-                                    <div class="modal fade" id="modalExcluirAdicional<?= $id_adicional ?>" tabindex="-1" aria-labelledby="modalExcluirAdicionalLabel<?= $id_adicional ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirAdicionalLabel<?= $id_adicional ?>">Remover o adicional "<?= $nome_adicional ?>"?</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluiradicional.php?id=<?= $id_adicional ?>" class="btn btn-danger">Remover</a>
+                                        <!-- Modal para confirmar a exclusão do adicional -->
+                                        <div class="modal fade" id="modalExcluirAdicional<?= $id_adicional ?>" tabindex="-1" aria-labelledby="modalExcluirAdicionalLabel<?= $id_adicional ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalExcluirAdicionalLabel<?= $id_adicional ?>">Remover o adicional "<?= $nome_adicional ?>"?</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <a href="acoes/deletar/excluiradicional.php?id=<?= $id_adicional ?>" class="btn btn-danger">Remover</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 <?php
+                                    }
+                                } else {
+                                    echo '<tr><td colspan="3" style="text-align: center;">Nenhum adicional encontrado.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -329,61 +346,67 @@ include '../conexao.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and status = 0 and i.id_itens = 3;");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0 and status = 0 and i.id_itens = 3;");
                                 $sth->execute();
-                                foreach ($sth as $res) {
-                                    extract($res); ?>
-                                    <tr>
-                                        <td><?= $nome_sabor ?></td>
-                                        <td>R$ <?= $valor ?></td>
-                                        <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modaltorta<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
-                                        </td>
-                                    </tr>
-                                    <!-- Modal para edição da torta -->
-                                    <div class="modal fade" id="modaltorta<?= $id_produto ?>" tabindex="-1" aria-labelledby="modaltortaLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modaltortaLabel<?= $id_produto ?>">Editar valor da torta "<?= $nome_sabor ?>"</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editartorta.php">
-                                                        <span>Preço atual: R$ <?= $valor ?> </span></br>
-                                                        <span>Novo preço:</span>
-                                                        <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
-                                                        <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo da torta">
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                $resultados = $sth->fetchAll();
 
-                                    <!-- Modal para confirmar a exclusão -->
-                                    <div class="modal fade" id="modalExcluir<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover a torta "<?= $sabor_bolo ?>"?</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
+                                if (count($resultados) > 0) {
+                                    foreach ($resultados as $res) {
+                                        extract($res); ?>
+                                        <tr>
+                                            <td><?= $nome_sabor ?></td>
+                                            <td>R$ <?= $valor ?></td>
+                                            <td>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modaltorta<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
+                                            </td>
+                                        </tr>
+                                        <!-- Modal para edição da torta -->
+                                        <div class="modal fade" id="modaltorta<?= $id_produto ?>" tabindex="-1" aria-labelledby="modaltortaLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modaltortaLabel<?= $id_produto ?>">Editar valor da torta "<?= $nome_sabor ?>"</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editartorta.php">
+                                                            <span>Preço atual: R$ <?= $valor ?> </span></br>
+                                                            <span>Novo preço:</span>
+                                                            <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
+                                                            <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo da torta">
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <!-- Modal para confirmar a exclusão -->
+                                        <div class="modal fade" id="modalExcluir<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover a torta "<?= $sabor_bolo ?>"?</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                 <?php
+                                    }
+                                } else {
+                                    echo '<tr><td colspan="3" style="text-align: center;">Nenhuma torta encontrada.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -410,61 +433,67 @@ include '../conexao.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor2 > 0 and status = 0 and i.id_itens = 4;");
+                                $sth = $pdo->prepare("SELECT * FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor INNER JOIN itens i on i.id_itens = p.nome_produto WHERE p.sabor > 0 and status = 0 and i.id_itens = 4;");
                                 $sth->execute();
-                                foreach ($sth as $res) {
-                                    extract($res); ?>
-                                    <tr>
-                                        <td><?= $nome_sabor ?></td>
-                                        <td>R$ <?= $valor ?></td>
-                                        <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalalfajar<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
-                                        </td>
-                                    </tr>
-                                    <!-- Modal para edição do alfajor -->
-                                    <div class="modal fade" id="modalalfajar<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalalfajarLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalalfajarLabel<?= $id_produto ?>">Editar valor do alfajar "<?= $nome_sabor ?>"</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editaralfajar.php">
-                                                        <span>Preço atual: R$ <?= $valor ?> </span></br>
-                                                        <span>Novo preço:</span>
-                                                        <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
-                                                        <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do alfajar">
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                $resultados = $sth->fetchAll();
 
-                                    <!-- Modal para confirmar a exclusão -->
-                                    <div class="modal fade" id="modalExcluir<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o alfajar "<?= $nome_sabor ?>"?</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
+                                if (count($resultados) > 0) {
+                                    foreach ($resultados as $res) {
+                                        extract($res); ?>
+                                        <tr>
+                                            <td><?= $nome_sabor ?></td>
+                                            <td>R$ <?= $valor ?></td>
+                                            <td>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalalfajar<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
+                                            </td>
+                                        </tr>
+                                        <!-- Modal para edição do alfajor -->
+                                        <div class="modal fade" id="modalalfajar<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalalfajarLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalalfajarLabel<?= $id_produto ?>">Editar valor do alfajar "<?= $nome_sabor ?>"</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editaralfajar.php">
+                                                            <span>Preço atual: R$ <?= $valor ?> </span></br>
+                                                            <span>Novo preço:</span>
+                                                            <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
+                                                            <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do alfajar">
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <!-- Modal para confirmar a exclusão -->
+                                        <div class="modal fade" id="modalExcluir<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o alfajar "<?= $nome_sabor ?>"?</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                 <?php
+                                    }
+                                } else {
+                                    echo '<tr><td colspan="3" style="text-align: center;">Nenhum aljafar encontrado.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -490,40 +519,46 @@ include '../conexao.php';
                                 <?php
                                 $sth = $pdo->prepare("SELECT * FROM produto p  INNER JOIN itens i on i.id_itens = p.nome_produto WHERE  status = 0 and i.id_itens = 5;");
                                 $sth->execute();
-                                foreach ($sth as $res) {
-                                    extract($res); ?>
-                                    <tr>
-                                        <td><?= $tamanho ?> unidade</td>
-                                        <td>R$ <?= $valor ?></td>
-                                        <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
-                                        </td>
-                                    </tr>
+                                $resultados = $sth->fetchAll();
 
-                                    <!-- Modal para edição do brigadeiro -->
-                                    <div class="modal fade" id="modalbrigadeiro<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalbrigadeiroLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalbrigadeiroLabel<?= $id_produto ?>">Editar valor da quantidade: <?= $tamanho ?> un.</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarbrigadeiro.php">
-                                                        <span>Preço atual: R$ <?= $valor ?> </span></br>
-                                                        <span>Novo preço:</span>
-                                                        <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
-                                                        <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do copo">
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                if (count($resultados) > 0) {
+                                    foreach ($resultados as $res) {
+                                        extract($res); ?>
+                                        <tr>
+                                            <td><?= $tamanho ?> unidade</td>
+                                            <td>R$ <?= $valor ?></td>
+                                            <td>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Modal para edição do brigadeiro -->
+                                        <div class="modal fade" id="modalbrigadeiro<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalbrigadeiroLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalbrigadeiroLabel<?= $id_produto ?>">Editar valor da quantidade: <?= $tamanho ?> un.</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarbrigadeiro.php">
+                                                            <span>Preço atual: R$ <?= $valor ?> </span></br>
+                                                            <span>Novo preço:</span>
+                                                            <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
+                                                            <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do copo">
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 <?php
+                                    }
+                                } else {
+                                    echo '<tr><td colspan="3" style="text-align: center;">Nenhum brigadeiro encontrado.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -547,34 +582,41 @@ include '../conexao.php';
                                 <?php
                                 $sth = $pdo->prepare("SELECT *FROM brigadeiro WHERE statusbrigadeiro = 0");
                                 $sth->execute();
-                                foreach ($sth as $res) {
-                                    extract($res); ?>
-                                    <tr>
-                                        <td><?= $nome_brigadeiro ?></td>
-                                        <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro1<?= $id_brigadeiro ?>"><i class="fas fa-trash" style="color: red;"></i></a>
-                                        </td>
-                                    </tr>
-                                    <!-- Modal para confirmar a exclusão -->
-                                    <div class="modal fade" id="modalbrigadeiro1<?= $id_brigadeiro ?>" tabindex="-1" aria-labelledby="modalbrigadeiro1Label<?= $id_brigadeiro ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalbrigadeiro1Label<?= $id_brigadeiro ?>">Remover o sabor "<?= $nome_brigadeiro ?>"?</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluibrigadeiro.php?id=<?= $id_brigadeiro ?>" class="btn btn-danger">Remover</a>
+                                $resultados = $sth->fetchAll();
+
+                                if (count($resultados) > 0) {
+                                    foreach ($resultados as $res) {
+                                        extract($res); ?>
+                                        <tr>
+                                            <td><?= $nome_brigadeiro ?></td>
+                                            <td>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro1<?= $id_brigadeiro ?>"><i class="fas fa-trash" style="color: red;"></i></a>
+                                            </td>
+                                        </tr>
+                                        <!-- Modal para confirmar a exclusão -->
+                                        <div class="modal fade" id="modalbrigadeiro1<?= $id_brigadeiro ?>" tabindex="-1" aria-labelledby="modalbrigadeiro1Label<?= $id_brigadeiro ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalbrigadeiro1Label<?= $id_brigadeiro ?>">Remover o sabor "<?= $nome_brigadeiro ?>"?</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <a href="acoes/deletar/excluibrigadeiro.php?id=<?= $id_brigadeiro ?>" class="btn btn-danger">Remover</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
                                 <?php
+                                    }
+                                } else {
+                                    // Mensagem quando não há resultados
+                                    echo '<tr><td colspan="3" style="text-align: center;">Nenhum sabor de brigadeiro encontrado.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -607,34 +649,41 @@ include '../conexao.php';
                                 <?php
                                 $sth = $pdo->prepare("SELECT *FROM saborgeral where id_geral > 0 and statusgeral = 0;");
                                 $sth->execute();
-                                foreach ($sth as $res) {
-                                    extract($res); ?>
-                                    <tr>
-                                        <td><?= $nome_sabor ?></td>
-                                        <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluirsab<?= $id_geral ?>"><i class="fas fa-trash" style="color: red;"></i></a>
-                                        </td>
-                                    </tr>
+                                $resultados = $sth->fetchAll();
 
-                                    <!-- Modal para confirmar a exclusão -->
-                                    <div class="modal fade" id="modalExcluirsab<?= $id_geral ?>" tabindex="-1" aria-labelledby="modalExcluirsabLabel<?= $id_geral ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirsabLabel<?= $id_geral ?>">Remover o sabor "<?= $nome_sabor ?>"?</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluirsabor.php?id=<?= $id_geral ?>" class="btn btn-danger">Remover</a>
+                                if (count($resultados) > 0) {
+                                    foreach ($resultados as $res) {
+                                        extract($res); ?>
+                                        <tr>
+                                            <td><?= $nome_sabor ?></td>
+                                            <td>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluirsab<?= $id_geral ?>"><i class="fas fa-trash" style="color: red;"></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Modal para confirmar a exclusão -->
+                                        <div class="modal fade" id="modalExcluirsab<?= $id_geral ?>" tabindex="-1" aria-labelledby="modalExcluirsabLabel<?= $id_geral ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalExcluirsabLabel<?= $id_geral ?>">Remover o sabor "<?= $nome_sabor ?>"?</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <a href="acoes/deletar/excluirsabor.php?id=<?= $id_geral ?>" class="btn btn-danger">Remover</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 <?php
+                                    }
+                                } else {
+                                    // Mensagem quando não há resultados
+                                    echo '<tr><td colspan="3" style="text-align: center;">Nenhum sabor encontrado.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -664,63 +713,69 @@ include '../conexao.php';
                             </thead>
                             <tbody>
                                 <?php
-                                $sth = $pdo->prepare("SELECT p.*, i.nome_itens AS nome_produto, s.nome_sabor AS sabor2 FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor2 INNER JOIN itens i ON i.id_itens = p.nome_produto WHERE p.status = 0 AND i.id_itens > 5");
+                                $sth = $pdo->prepare("SELECT p.*, i.nome_itens AS nome_produto, s.nome_sabor AS sabor FROM produto p INNER JOIN saborgeral s ON s.id_geral = p.sabor INNER JOIN itens i ON i.id_itens = p.nome_produto WHERE p.status = 0 AND i.id_itens > 5");
                                 $sth->execute();
-                                foreach ($sth as $res) {
-                                    extract($res); ?>
-                                    <tr>
-                                        <td><?= $nome_produto ?></td>
-                                        <td><?= $sabor2 ?></td>
-                                        <td><?= $tamanho ?> g</td>
-                                        <td>R$ <?= $valor ?></td>
-                                        <td>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalprodutos<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
-                                            <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
-                                        </td>
-                                    </tr>
-                                    <!-- Modal para edição de outros produtos -->
-                                    <div class="modal fade" id="modalprodutos<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalprodutosLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalprodutosLabel<?= $id_produto ?>">Editar valor: <?= $nome_produto ?>, sabor: <?= $sabor2 ?>, tamanho: <?= $tamanho ?></h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarproduto.php">
-                                                        <span>Preço atual: R$ <?= $valor ?> </span></br>
-                                                        <span>Novo preço:</span>
-                                                        <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
-                                                        <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo">
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                $resultados = $sth->fetchAll();
 
-                                    <!-- Modal para confirmar a exclusão -->
-                                    <div class="modal fade" id="modalExcluir<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_produto ?>" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o produto "<?= $nome_produto ?>, sabor: <?= $sabor2 ?>, tamanho: <?= $tamanho ?>"?</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
+                                if (count($resultados) > 0) {
+                                    foreach ($resultados as $res) {
+                                        extract($res); ?>
+                                        <tr>
+                                            <td><?= $nome_produto ?></td>
+                                            <td><?= $sabor ?></td>
+                                            <td><?= $tamanho ?> g</td>
+                                            <td>R$ <?= $valor ?></td>
+                                            <td>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalprodutos<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalExcluir<?= $id_produto ?>"><i class="fas fa-trash" style="color: red;"></i></a>
+                                            </td>
+                                        </tr>
+                                        <!-- Modal para edição de outros produtos -->
+                                        <div class="modal fade" id="modalprodutos<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalprodutosLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalprodutosLabel<?= $id_produto ?>">Editar valor: <?= $nome_produto ?>, sabor: <?= $sabor ?>, tamanho: <?= $tamanho ?></h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarproduto.php">
+                                                            <span>Preço atual: R$ <?= $valor ?> </span></br>
+                                                            <span>Novo preço:</span>
+                                                            <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
+                                                            <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo">
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <!-- Modal para confirmar a exclusão -->
+                                        <div class="modal fade" id="modalExcluir<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalExcluirLabel<?= $id_produto ?>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o produto "<?= $nome_produto ?>, sabor: <?= $sabor ?>, tamanho: <?= $tamanho ?>"?</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>O produto não estará mais disponível para venda ou edição. No entanto, se o produto já tiver sido vendido, ele continuará visível nos registros de vendas.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                        <a href="acoes/deletar/excluirproduto.php?id=<?= $id_produto ?>" class="btn btn-danger">Remover</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                 <?php
+                                    }
+                                } else {
+                                    echo '<tr><td colspan="5" style="text-align: center;">Nenhum produto encontrado.</td></tr>';
                                 }
                                 ?>
                             </tbody>
@@ -743,7 +798,22 @@ include '../conexao.php';
                             <form method="POST" action="acoes/adicionar/registrarbolo.php">
                                 <div class="modal-body">
                                     <span>Sabor:</span>
-                                    <input type="text" class="form-control" name="sabor" placeholder="Sabor do bolo" required>
+                                    <select required class='form-select' id="sabores2" name="sabores">
+                                        <option value='' disabled selected>Escolha um sabor</option>
+                                        <?php
+                                        $sth = $pdo->prepare("SELECT * FROM saborgeral where statusgeral = 0");
+                                        $sth->execute();
+                                        foreach ($sth as $res) {
+                                            extract($res); ?>
+                                            <option value="<?= $id_geral ?>"><?= $nome_sabor ?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                        <option value="outrosabor">Outro (Adicionar novo)</option>
+                                    </select>
+                                    <div id="novosaborbolo" class="mt-3" style="display:none;">
+                                        <input type="text" class="form-control" name="novo_sabor" placeholder="Digite o novo sabor">
+                                    </div>
                                     <span>Preço:</span>
                                     <input type="text" class="form-control" name="valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço do bolo">
                                 </div>
@@ -931,14 +1001,13 @@ include '../conexao.php';
                                     <div id="novoTipoProduto" class="mt-3" style="display:none;">
                                         <input type="text" class="form-control" name="novo_tipo_produto" placeholder="Digite o novo tipo de produto">
                                     </div>
-
                                     <div class="mt-3">
                                         <button type="button" class="btn btn-primary" id="btnAdicionarSabor">Adicionar Sabor</button>
                                         <button type="button" class="btn btn-secondary" id="btnAdicionarTamanho">Adicionar Tamanho</button>
                                     </div>
 
                                     <div id="saborInput" class="mt-3" style="display:none;">
-                                        <select required class='form-select' name="sabor">
+                                        <select required class='form-select' id="saborProduto" name="sabor">
                                             <option value='' disabled selected>Escolha um sabor</option>
                                             <?php
                                             $sth = $pdo->prepare("SELECT * FROM saborgeral where statusgeral = 0");
@@ -949,7 +1018,11 @@ include '../conexao.php';
                                             <?php
                                             }
                                             ?>
+                                            <option value="outrosabor">Outro (Adicionar novo)</option>
                                         </select>
+                                        <div id="novosaborproduto" class="mt-3" style="display:none;">
+                                            <input type="text" class="form-control" name="novo_sabor" placeholder="Digite o novo sabor">
+                                        </div>
                                     </div>
 
                                     <div id="tamanhoInput" class="mt-3" style="display:none;">
@@ -975,7 +1048,7 @@ include '../conexao.php';
     </div>
 
     <script src="../js/scripts.js"></script>
-    <script src="../js/itens.js"></script>
+    <script src="../js/item.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

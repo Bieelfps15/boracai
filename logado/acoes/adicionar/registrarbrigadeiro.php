@@ -4,7 +4,7 @@ include '../../../conexao.php';
 
 $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-$nomeBrigadeiro = mb_strtoupper(mb_substr(trim($post['nome_brigadeiro']), 0, 1), 'UTF-8') . mb_strtolower(mb_substr(trim($post['nome_brigadeiro']), 1), 'UTF-8');
+$nomeBrigadeiro = ucfirst(strtolower($_POST['nome_brigadeiro']));
 $status = 0;
 
 $Dados = array(
@@ -19,7 +19,6 @@ $Create = "INSERT INTO {$Tabela} ({$Fields}) VALUES ({$Places})";
 
 $sth = $pdo->prepare($Create);
 $sth->execute($Dados);
-echo $pdo->lastInsertId();
 
 header("Location: ../../itens.php?&aba=menu6");
 

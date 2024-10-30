@@ -1,44 +1,48 @@
 <?php
+    include '../../../conexao.php'; 
 
-try {
-    $pdo = new PDO("mysql:host=localhost;dbname=boracai", "root", "");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erro de conexão com o banco de dados: " . $e->getMessage());
-}
+    $post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+    $sabor = $_POST['sabores'];
+    $novo_sabor = $_POST['novo_sabor'];
+    $status = 0;
+    $tamanho = 0;
+    $nome = 2;
+    $valorConvertido = str_replace(',', '.', str_replace('.', '', $post['valor']));
 
-if (isset($_POST['action'])) {
-    $sabor = mb_strtoupper(mb_substr(trim($_POST['sabor']), 0, 1), 'UTF-8') . mb_strtolower(mb_substr(trim($_POST['sabor']), 1), 'UTF-8');
-    $valor = str_replace(",", ".", str_replace(".", "", $_POST['valor'])); 
+    if ($sabor === 'outrosabor' && !empty($novo_sabor)) {
+        $sabor = ucfirst(strtolower($novo_sabor));
 
-    if (!empty($sabor) && !empty($valor)) {
-        try {
-            $pdo->beginTransaction();
+        $Dados = array(
+            'nome_sabor' => $sabor,
+            'statusgeral' => $status 
+        );
+        
+        $Fields = implode(', ', array_keys($Dados));
+        $Places = ':' . implode(', :', array_keys($Dados));
+        $Tabela = 'saborgeral';
+        $Create = "INSERT INTO {$Tabela} ({$Fields}) VALUES ({$Places})";
+        $sth = $pdo->prepare($Create);
+        $sth->execute($Dados);
 
-            $stmt = $pdo->prepare("INSERT INTO saborbolo (sabor_bolo) VALUES (:sabor)");
-            $stmt->bindParam(':sabor', $sabor);
-            $stmt->execute();
-
-            $saborId = $pdo->lastInsertId();
-
-            $stmt = $pdo->prepare("INSERT INTO produto (nome_produto, sabor, sabor2, tamanho, valor, status) VALUES (2, :saborId, 0, 0, :valor, 0)");
-            $stmt->bindParam(':saborId', $saborId);
-            $stmt->bindParam(':valor', $valor);
-            $stmt->execute();
-
-            $pdo->commit();
-
-            header("Location: ../../itens.php?msg=Bolo adicionado com sucesso!");
-            exit();
-        } catch (Exception $e) {
-            $pdo->rollBack();
-            die("Erro ao adicionar o bolo: " . $e->getMessage());
-        }
+        $sabor_id = $pdo->lastInsertId();
     } else {
-        header("Location: ../../itens.php?msg=Preencha todos os campos!");
-        exit();
+        $sabor_id = $sabor;
     }
-}
 
-$pdo = null;
+    $Dados = array(
+        'nome_produto' => $nome,
+        'sabor' => $sabor_id,
+        'tamanho' => $tamanho,
+        'valor' => $valorConvertido,
+        'status' => $status 
+    );
+    
+    $Fields = implode(', ', array_keys($Dados));
+    $Places = ':' . implode(', :', array_keys($Dados));
+    $Tabela = 'produto';
+    $Create = "INSERT INTO {$Tabela} ({$Fields}) VALUES ({$Places})";
+    $sth = $pdo->prepare($Create);
+    $sth->execute($Dados);
+
+    header("Location: ../../itens.php?msg=Produto adicionado com sucesso!&aba=menu1");
 ?>

@@ -67,7 +67,7 @@ include 'dashbord/dados.php';
 
                                                                       include '../conexao.php';
 
-                                                                      $sth = $pdo->prepare("SELECT SUM(DISTINCT p.valortotal) AS total_vendas FROM pedido p JOIN numeropedido n ON p.numeropedido = n.id WHERE DATE(n.data) = CURDATE();");
+                                                                      $sth = $pdo->prepare("SELECT SUM(valortotal) AS total_vendas FROM (SELECT DISTINCT p.numeropedido, p.valortotal FROM pedido p JOIN numeropedido n ON p.numeropedido = n.id WHERE DATE(n.data) = CURDATE()) AS unique_pedidos");
 
                                                                       $sth->execute();
                                                                       $res = $sth->fetch(PDO::FETCH_ASSOC);

@@ -13,7 +13,7 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
 
     foreach ($_SESSION['carrinho'] as $index => $item) {
         $item_total = $item['valor'];
-        $total_pedido += $item_total; // Soma ao total do pedido
+        $total_pedido += $item_total; // soma ao total do pedido
 
         echo "<tr>";
         if (isset($item['tipo'])) {
@@ -85,26 +85,24 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
 ?>
 
 <script>
-    // Script para habilitar o input da taxa de entrega
+    // habilitar o input da taxa de entrega
     document.getElementById('toggleTaxa').addEventListener('click', function() {
         var taxaContainer = document.getElementById('taxaContainer');
         taxaContainer.style.display = (taxaContainer.style.display === 'none') ? 'block' : 'none';
-        atualizarTotal(); // Atualiza o total ao abrir/fechar o campo da taxa
+        atualizarTotal(); 
     });
 
-    // Função para atualizar o valor total
     function atualizarTotal() {
         const taxaEntregaInput = document.getElementById('taxa_entrega').value;
-        const taxaEntrega = parseFloat(taxaEntregaInput.replace(',', '.').replace(/[^\d.-]/g, '')) || 0; // Converte a taxa para número
-        const valorTotalOriginal = <?php echo $total_pedido; ?>; // Valor total original do pedido
-        const totalComTaxa = valorTotalOriginal + taxaEntrega; // Soma a taxa ao total
+        const taxaEntrega = parseFloat(taxaEntregaInput.replace(',', '.').replace(/[^\d.-]/g, '')) || 0;
+        const valorTotalOriginal = <?php echo $total_pedido; ?>; 
+        const totalComTaxa = valorTotalOriginal + taxaEntrega;
 
-        // Atualiza o campo oculto de valor total
-        document.getElementById('valor_total').value = totalComTaxa.toFixed(2).replace('.', ','); // Formata e atualiza o valor
+        document.getElementById('valor_total').value = totalComTaxa.toFixed(2).replace('.', ','); 
         document.getElementById('exibir_valor_total').innerText = "R$ " + totalComTaxa.toLocaleString('pt-BR', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
-        }); // Atualiza exibição
+        }); 
     }
 </script>
 

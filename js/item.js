@@ -16,9 +16,27 @@ document.getElementById('sabores1').addEventListener('change', function() {
     }
 });
 
+document.getElementById('sabores2').addEventListener('change', function() {
+    var novoTipo = document.getElementById('novosaborbolo');
+    if (this.value === 'outrosabor') {
+        novoTipo.style.display = 'block';
+    } else {
+        novoTipo.style.display = 'none';
+    }
+});
+
 document.getElementById('tipoProduto').addEventListener('change', function() {
     var novoTipo = document.getElementById('novoTipoProduto');
     if (this.value === 'outro') {
+        novoTipo.style.display = 'block';
+    } else {
+        novoTipo.style.display = 'none';
+    }
+});
+
+document.getElementById('saborProduto').addEventListener('change', function() {
+    var novoTipo = document.getElementById('novosaborproduto');
+    if (this.value === 'outrosabor') {
         novoTipo.style.display = 'block';
     } else {
         novoTipo.style.display = 'none';
@@ -43,11 +61,9 @@ document.addEventListener("DOMContentLoaded", function() {
     if (aba) {
         const menuTab = document.querySelector(`#${aba}-tab`);
         if (menuTab) {
-            // Remove a classe 'active' de todas as abas e conteúdo
             document.querySelectorAll('.nav-link').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active', 'show'));
             
-            // Ativa a aba e o conteúdo específico
             menuTab.classList.add('active');
             const tabContent = document.querySelector(`#${aba}`);
             if (tabContent) {
