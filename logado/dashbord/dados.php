@@ -86,7 +86,7 @@ JOIN
     ) numbers ON CHAR_LENGTH(pd.adicionais) - CHAR_LENGTH(REPLACE(pd.adicionais, ',', '')) >= numbers.n - 1
 WHERE 
     pd.nomeproduto LIKE '%açai%'  
-    AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) <> 'Nenhum'
+    AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) <> 'N/A'
     AND TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(pd.adicionais, ',', numbers.n), ',', -1)) <> ''
 GROUP BY 
     Adicional

@@ -156,7 +156,7 @@ include '../conexao.php';
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o bolo "<?= $sabor_bolo ?>"?</h5>
+                                                        <h5 class="modal-title" id="modalExcluirLabel<?= $id_produto ?>">Remover o bolo "<?= $nome_sabor ?>"?</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -501,8 +501,6 @@ include '../conexao.php';
                     </div>
                 </div>
 
-
-
                 <!-- Aba de brigadeiro -->
                 <div id="menu6" class="tab-pane fade" role="tabpanel" aria-labelledby="menu6-tab">
                     <h3 style="text-align: center;color: white;padding: 1rem">BRIGADEIRO</h3>
@@ -528,29 +526,29 @@ include '../conexao.php';
                                             <td><?= $tamanho ?> unidade</td>
                                             <td>R$ <?= $valor ?></td>
                                             <td>
-                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbrigadeiro<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
+                                                <a class="modal-trigger" data-bs-toggle="modal" data-bs-target="#modalbriga<?= $id_produto ?>"><i class="fas fa-edit"></i></a>
                                             </td>
                                         </tr>
 
                                         <!-- Modal para edição do brigadeiro -->
-                                        <div class="modal fade" id="modalbrigadeiro<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalbrigadeiroLabel<?= $id_produto ?>" aria-hidden="true">
+                                        <div class="modal fade" id="modalbriga<?= $id_produto ?>" tabindex="-1" aria-labelledby="modalbrigaLabel<?= $id_produto ?>" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalbrigadeiroLabel<?= $id_produto ?>">Editar valor da quantidade: <?= $tamanho ?> un.</h5>
+                                                        <h5 class="modal-title" id="modalbrigaLabel<?= $id_produto ?>">Editar valor do brigadeiro com (<?= $tamanho ?>) un</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form id="formEdit<?= $id_produto ?>" method="POST" action="acoes/editar/editarbrigadeiro.php">
+                                                        <form id="form<?= $id_produto ?>" method="POST" action="acoes/editar/editarbrigadeiro.php">
                                                             <span>Preço atual: R$ <?= $valor ?> </span></br>
                                                             <span>Novo preço:</span>
                                                             <input type="hidden" name="id_produto" value="<?= $id_produto ?>">
-                                                            <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo do copo">
+                                                            <input type="text" class="form-control" name="novo_valor" inputmode="numeric" pattern="[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?" onKeyPress="return(moeda(this,'.',',',event))" required="required" placeholder="Preço novo">
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                                        <button type="button" class="btn btn-success" onclick="document.getElementById('formEdit<?= $id_produto ?>').submit();">Editar</button>
+                                                        <button type="button" class="btn btn-success" onclick="document.getElementById('form<?= $id_produto ?>').submit();">Editar</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -623,6 +621,8 @@ include '../conexao.php';
                         </table>
                     </div>
                 </div>
+
+
 
 
 

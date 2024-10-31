@@ -11,4 +11,4 @@ $sth->bindValue(":valor", $novo_valor, PDO::PARAM_STR);
 $sth->bindValue(":id_produto", $id_produto, PDO::PARAM_INT);
 
 $sth->execute();
-header("LOCATION: ../../itens.php");
+header("LOCATION: ../../itens.php?&aba=menu8");

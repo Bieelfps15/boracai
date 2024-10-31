@@ -30,7 +30,7 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
             } elseif ($item['tipo'] == 'brigadeiro') {
                 echo "<td>" . (isset($item['nome']) ? $item['nome'] : 'N/A') . "</td>";
                 echo "<td>" . (isset($item['tamanho']) ? $item['tamanho'] : 'N/A') . "</td>";
-                echo "<td>" . (isset($item['sabores']) ? implode(", ", $item['sabores']) : 'Nenhum') . "</td>";
+                echo "<td>" . (isset($item['sabores']) ? $item['sabores'] : 'Nenhum') . "</td>";
                 echo "<td>R$ " . number_format($item['valor'], 2, ',', '.') . "</td>";
             } elseif ($item['tipo'] == 'produto') {
                 echo "<td>" . (isset($item['nome']) ? $item['nome'] : 'N/A') . "</td>";
@@ -42,7 +42,7 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
         echo "<td>
             <form method='POST' action='remover_item.php' style='display:inline;'>
                 <input type='hidden' name='index' value='$index'>
-                <button type='submit'><img src='../../img/delatar.png' class='navbar-toggler-icon'></button>
+                <button type='submit'><i class='fas fa-trash' style='color: red;'></i></button>
             </form>
         </td>";
 
@@ -75,7 +75,7 @@ if (!isset($_SESSION['carrinho']) || empty($_SESSION['carrinho'])) {
     echo "<div class='form-group mt-2' id='taxaContainer' style='display: none;'>";
     echo "<label for='taxa_entrega'>Taxa de Entrega:</label>";
     echo "<input type='text' name='taxa_entrega' id='taxa_entrega' class='form-control' placeholder='Digite a taxa de entrega' 
-        inputmode='numeric' pattern='[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?' onKeyPress='return(moeda(this, \".\", \",\", event));' onInput='atualizarTotal()'>"; // Adicionando o evento onInput
+        inputmode='numeric' pattern='[0-9]*(\.[0-9]{1,2}|,[0-9]{1,2})?' onKeyPress='return(moeda(this, \".\", \",\", event));' onInput='atualizarTotal()'>";
     echo "</div>";
 
     echo "<button type='submit' class='btn btn-success mt-2'>Finalizar Pedido</button>";

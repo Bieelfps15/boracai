@@ -12,4 +12,4 @@ $sth->bindValue(":id_adicional", $id_adicional, PDO::PARAM_INT);
 $sth->execute();
 
 
-header("LOCATION: ../../itens.php");
+header("LOCATION: ../../itens.php?&aba=menu2");

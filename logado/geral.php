@@ -131,14 +131,11 @@ include 'dashbord/dados.php';
 
                                                                       include '../conexao.php';
 
-                                                                      $sth = $pdo->prepare("SELECT SUM(CASE 
+            $sth = $pdo->prepare("SELECT SUM(CASE 
             WHEN pagamento = 'ifood' THEN total_pedido * 0.88 
             WHEN pagamento = 'credito' THEN total_pedido * 0.965  
             WHEN pagamento = 'debito' THEN total_pedido * 0.985  
-            ELSE total_pedido  
-        END ) AS total_com_desconto FROM (
-    SELECT numeropedido, pagamento, MAX(valortotal) AS total_pedido
-    FROM pedido GROUP BY numeropedido, pagamento ) AS pedidos_agrupados;");
+            ELSE total_pedido END ) AS total_com_desconto FROM (SELECT numeropedido, pagamento, MAX(valortotal) AS total_pedido FROM pedido GROUP BY numeropedido, pagamento ) AS pedidos_agrupados;");
 
                                                                       $sth->execute();
                                                                       foreach ($sth as $res) {

@@ -369,16 +369,15 @@ if (!isset($_SESSION['carrinho'])) {
                                 <?php
                                 $sth = $pdo->prepare("SELECT * FROM brigadeiro WHERE statusbrigadeiro = 0");
                                 $sth->execute();
-                                $sabores = $sth->fetchAll(); // Pega todos os resultados de uma vez
+                                $sabores = $sth->fetchAll();
                                 $quantidadeDeGrupos = 4;
 
                                 for ($i = 1; $i <= $quantidadeDeGrupos; $i++) {
                                     echo "<span>Sabor $i:</span><br>";
                                     echo '<div class="col-lg-12">';
 
-                                    // Exibe todos os botões de rádio dentro de cada grupo
                                     foreach ($sabores as $res) {
-                                        $nome_brigadeiro = htmlspecialchars($res['nome_brigadeiro']); // Evitar problemas de segurança
+                                        $nome_brigadeiro = htmlspecialchars($res['nome_brigadeiro']);
                                         $id_brigadeiro = htmlspecialchars($res['id_brigadeiro']); ?>
 
                                         <div class="form-check form-check-inline">
